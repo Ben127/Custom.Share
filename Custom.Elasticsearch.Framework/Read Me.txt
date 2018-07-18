@@ -17,12 +17,12 @@
    http://192.168.1.100:9200/_analyze?analyzer=ik&pretty=true&text=我是中国人
    
  二、ES插件
-	 1 head 插件：用来浏览、与Elastic Search簇进行交互的web前端展示插件
-	 bin目录 cmd 输入 plugin install mobz/elasticsearch-head
+   1 head 插件：用来浏览、与Elastic Search簇进行交互的web前端展示插件
+   bin目录 cmd 输入 plugin install mobz/elasticsearch-head
 	 
-	 2 IK分词
-	 访问 https://github.com/medcl/elasticsearch-analysis-ik/releases 下载elasticsearch-analysis-ik-1.10.6.zip【注意包跟ES版本要一致】
-	 源代码版： mvn clean package  ，elasticsearch-analysis-ik-1.10.6-sources.jar --> lib，config --> ik文件夹放 config
-     安装包版： elasticsearch-analysis-ik-1.10.6.jar --> lib，es config 文件夹 -->增加 ik文件夹放 config 里面所有内容
+   2 IK分词
+   访问 https://github.com/medcl/elasticsearch-analysis-ik/releases 下载elasticsearch-analysis-ik-1.10.6.zip【注意包跟ES版本要一致】
+   源代码版： mvn clean package  ，elasticsearch-analysis-ik-1.10.6-sources.jar --> lib，config --> ik文件夹放 config
+   安装包版： elasticsearch-analysis-ik-1.10.6.jar --> lib，es config 文件夹 -->增加 ik文件夹放 config 里面所有内容
 
 
