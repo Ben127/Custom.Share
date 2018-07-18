@@ -1,0 +1,28 @@
+
+# Elasticsearch 2.4.6 为例 
+
+一、ES安装，需提前安装JAVA环境
+   1，JAVA环境的安装
+   访问 http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html 并安装JAVA环境包；
+   安装完毕配置环境变量【计算机→进入属性→点击高级系统设置→高级→环境变量】；
+   系统变量→新建 JAVA_HOME 变量；
+   系统变量→寻找 Path 变量→编辑 填%JAVA_HOME%\bin;
+   最后检验是否配置成功 运行cmd 输入 java -version
+   
+   2，ES的下载安装
+   访问 https://www.elastic.co/downloads/past-releases 选择一个ES版本并下载，这里使用的是 v 2.4.6
+   解压到一个目录，进入bin，右键elasticsearch.bat 管理员运行即可，window 系统建议安装成window服务
+   安装成window服务如下：bin目录 cmd 输入 service.bat install安装成服务    
+   启动/关闭服务 net start/stop  ....
+   http://192.168.1.100:9200/_analyze?analyzer=ik&pretty=true&text=我是中国人
+   
+ 二、ES插件
+	 1 head 插件：用来浏览、与Elastic Search簇进行交互的web前端展示插件
+	 bin目录 cmd 输入 plugin install mobz/elasticsearch-head
+	 
+	 2 IK分词
+	 访问 https://github.com/medcl/elasticsearch-analysis-ik/releases 下载elasticsearch-analysis-ik-1.10.6.zip【注意包跟ES版本要一致】
+	 源代码版： mvn clean package  ，elasticsearch-analysis-ik-1.10.6-sources.jar --> lib，config --> ik文件夹放 config
+     安装包版： elasticsearch-analysis-ik-1.10.6.jar --> lib，es config 文件夹 -->增加 ik文件夹放 config 里面所有内容
+
+
