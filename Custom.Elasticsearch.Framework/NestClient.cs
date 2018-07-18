@@ -172,6 +172,35 @@ namespace Custom.Elasticsearch.Framework
         }
 
 
+        /// <summary>
+        ///  删除一条Es数据
+        /// </summary>
+        /// <param name="index">索引名称 [db]</param>
+        /// <param name="type">索引类型 [table]</param>
+        /// <param name="primarykeyValue">主键值</param>
+        /// <returns></returns>
+        public static bool Delete(string index, string type, string primarykeyValue)
+        {
+
+            IDeleteRequest request = new DeleteRequest(index, type, primarykeyValue);
+            var response = client.Delete(request);
+            if (response.OriginalException != null && response.Found)
+            {
+                throw new ArgumentException(response.OriginalException.Message, response.OriginalException);
+            }
+            if (DebuggerMode && response.ApiCall != null)
+            {
+                var url = response.ApiCall.Uri.AbsoluteUri;
+                var responseText = System.Text.Encoding.UTF8.GetString(response.ApiCall.ResponseBodyInBytes);
+
+                Debug.WriteLine(string.Format("url：{0}\t\n response：{1}", url, responseText));
+            }
+
+            return response.IsValid;
+
+        }
+
+
     }
 
 
