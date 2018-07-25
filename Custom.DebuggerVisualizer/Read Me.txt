@@ -1,0 +1,12 @@
+
+# 调试插件 图片调试的扩展
+
+当前版本 VS2012
+ 
+ 一、项目
+ 添加扩展引用 Microsoft.VisualStudio.DebuggerVisualizers.dll   11.0.0.0
+ 继承 DialogDebuggerVisualizer 重写Show 方法
+ 
+ 二、VS调试功能引用
+ 将生成的dll 添加到 C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\Packages\Debugger\Visualizers 【VS2012】，版本视VS情况而定
+ 重启VS生效，调试将会出现插件扩展的展示
