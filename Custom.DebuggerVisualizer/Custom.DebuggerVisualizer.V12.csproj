@@ -42,8 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\JSONHelper.cs" />
     <Compile Include="CustomDebuggerVisualizer.cs" />
     <Compile Include="DebuggerVisulizer\ImageCustomDebuggerVisulizer.cs" />
+    <Compile Include="DebuggerVisulizer\JsonDebuggerVisulizer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
