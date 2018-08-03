@@ -5,4 +5,10 @@ v1.0  2018-07-18
 
 Custom.Elasticsearch.Framework  Elasticsearc's connection by Nest
 
+v1.1 2018-07-26
+
 Custom.DebuggerVisualizer  custom debugger visualizer
+
+v 1.3  2018-08-02
+
+Custom.Template code generate
