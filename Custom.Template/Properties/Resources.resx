@@ -145,15 +145,6 @@
   <data name="CustomTTinclude" xml:space="preserve">
     <value />
   </data>
-  <data name="PetaPoco_Core" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\lib\PetaPoco.Core.ttinclude;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PetaPoco_Generator" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\lib\PetaPoco.Generator.ttinclude;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="PetaPoco_MultiFile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\lib\PetaPoco.MultiFile.ttinclude;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="TargetExt" xml:space="preserve">
     <value>*.dll</value>
   </data>

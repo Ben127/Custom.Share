@@ -91,36 +91,6 @@ namespace Custom.Template.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        internal static byte[] PetaPoco_Core {
-            get {
-                object obj = ResourceManager.GetObject("PetaPoco_Core", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        internal static byte[] PetaPoco_Generator {
-            get {
-                object obj = ResourceManager.GetObject("PetaPoco_Generator", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        internal static byte[] PetaPoco_MultiFile {
-            get {
-                object obj = ResourceManager.GetObject("PetaPoco_MultiFile", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
         internal static byte[] System {
             get {
                 object obj = ResourceManager.GetObject("System", resourceCulture);

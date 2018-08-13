@@ -88,10 +88,13 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="include\PetaPoco.Core.ttinclude" />
     <None Include="include\PetaPoco.Generator.ttinclude" />
     <None Include="include\PetaPoco.MultiFile.ttinclude" />
