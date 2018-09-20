@@ -1,0 +1,44 @@
+﻿
+Custom.SqlClr.RegexEx
+
+
+SQL Server CLR 
+
+SQL Server 执行脚本
+---------------------------------------
+
+1，注册dll
+CREATE ASSEMBLY Regex from 'E:\CustomSqlRegex.dll' WITH PERMISSION_SET = SAFE 
+
+2，sp_configure 'clr enabled', 1   --将数据库设置为可以使用clr组件  
+
+3，RECONFIGURE         --设置可用clr组件。别忘记运行这行进行应用
+
+4，封装为函数
+
+/****正则匹配****/  
+--DROP FUNCTION [dbo].[Regex.Match]  
+CREATE FUNCTION [dbo].[Regex.Match](@Regex [nvarchar](max),@Input [nvarchar](max))  
+RETURNS [nvarchar](max) WITH EXECUTE AS CALLER  
+AS   
+external NAME [Regex].[CustomSqlRegex.RegexExtend].[Match]  
+  
+/****正则替换****/  
+--DROP FUNCTION [dbo].[Regex.Replace]  
+CREATE FUNCTION [dbo].[Regex.Replace](@Regex [nvarchar](max),@Input [nvarchar](max),@Replace [nvarchar](max))  
+RETURNS [nvarchar](max) WITH EXECUTE AS CALLER  
+AS   
+EXTERNAL NAME [Regex].[CustomSqlRegex.RegexExtend].[Replace]  
+  
+/****正则校验****/  
+--DROP FUNCTION [dbo].[Regex.IsMatch]  
+CREATE FUNCTION [dbo].[Regex.IsMatch](@Regex [nvarchar](max),@Input [nvarchar](max))  
+RETURNS [bit] WITH EXECUTE AS CALLER  
+AS   
+EXTERNAL NAME [Regex].[CustomSqlRegex.RegexExtend].[IsMatch]  
+
+
+5，调用
+select Regex.Match('\d+',"content")
+
+
