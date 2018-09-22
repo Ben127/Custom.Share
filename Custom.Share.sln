@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom.Template", "Custom.T
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom.SqlClr.RegexEx", "Custom.SqlClr.RegexEx\Custom.SqlClr.RegexEx.csproj", "{597EC9E0-E868-4EB4-8794-AE5A75FB0A34}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom.CustomControl", "Custom.CustomControl\Custom.CustomControl.csproj", "{B4A8A066-774A-48DC-A7A6-7C6959617393}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{597EC9E0-E868-4EB4-8794-AE5A75FB0A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{597EC9E0-E868-4EB4-8794-AE5A75FB0A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{597EC9E0-E868-4EB4-8794-AE5A75FB0A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4A8A066-774A-48DC-A7A6-7C6959617393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4A8A066-774A-48DC-A7A6-7C6959617393}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4A8A066-774A-48DC-A7A6-7C6959617393}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4A8A066-774A-48DC-A7A6-7C6959617393}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
