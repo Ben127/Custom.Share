@@ -1,0 +1,19 @@
+﻿
+
+
+Custom.Basic.Framework 测试类库
+以下xnuit 版本 2.1.0 
+
+安装 xunit 
+Install-Package xunit -Version 2.1.0
+
+安装 xunit.runner.visualstudio
+Install-Package xunit.runner.visualstudio -Version 2.1.0 类库
+Install-Package xunit.runner.console -Version 2.1.0 控制台
+
+使用
+需要测试的方法添加 [Fact] 特性
+Assert 断言
+
+官方资料
+https://xunit.github.io/docs/getting-started-desktop

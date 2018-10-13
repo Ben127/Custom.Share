@@ -11,7 +11,7 @@
    
    2，ES的下载安装
    访问 https://www.elastic.co/downloads/past-releases 选择一个ES版本并下载，这里使用的是 v 2.4.6
-   解压到一个目录，进入bin，右键elasticsearch.bat 管理员运行即可，window 系统建议安装成window服务
+   解压到一个目录，进入bin，右键elasticsearch.bat 管理员运行即可，window 系统建议安装成window服务，service.bat install 
    安装成window服务如下：bin目录 cmd 输入 service.bat install安装成服务    
    启动/关闭服务 net start/stop  ....
 
@@ -26,4 +26,16 @@
    源代码版： mvn clean package  ，elasticsearch-analysis-ik-1.10.6-sources.jar --> lib，config --> ik文件夹放 config
    安装包版： elasticsearch-analysis-ik-1.10.6.jar --> lib，es config 文件夹 -->增加 ik文件夹放 config 里面所有内容
    http://192.168.1.100:9200/_analyze?analyzer=ik&pretty=true&text=我是中国人  [内外网ip]
+
+   3 search-guard 身份验证 
+   官网说明 https://docs.search-guard.com/latest/index ，社区版免费 elasticsearch.yml 设置searchguard.enterprise_modules_enabled: false
+   a，安装Search Guard
+   es bin目录  cmd 输入 plugin install -b com.floragunn/search-guard-2/2.4.6.14
+   plugin install -b com.floragunn/search-guard-ssl/2.4.6.21  安装 ssl
+
+   相应es对应版本 https://docs.search-guard.com/v5/search-guard-versions 查看，注【版本 ：换成/】
+   官方介绍 https://docs.search-guard.com/latest/search-guard-installation
+
+
+
 
