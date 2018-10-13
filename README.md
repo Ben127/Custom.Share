@@ -16,3 +16,8 @@ Custom.Template code generate
 v1.4 2018-09-20
 
 Custom.SqlClr.RegexEx
+
+v1.5 2018-09-22
+
+Custom.CustomControl 自定义winform 百分比进度条 demo
+![image](https://raw.githubusercontent.com/Ben127/Custom.Share/master/Custom.CustomControl/lib/2.png)
