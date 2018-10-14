@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,6 +40,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\PetaPoco\AnsiString.cs" />
+    <Compile Include="Entity\PetaPoco\ArrayKey.cs" />
+    <Compile Include="Entity\PetaPoco\AutoSelectHelper.cs" />
+    <Compile Include="Entity\PetaPoco\Cache.cs" />
+    <Compile Include="Entity\PetaPoco\ColumnAttribute.cs" />
+    <Compile Include="Entity\PetaPoco\ColumnInfo.cs" />
+    <Compile Include="Entity\PetaPoco\ConventionMapper.cs" />
+    <Compile Include="Entity\PetaPoco\Database.cs" />
+    <Compile Include="Entity\PetaPoco\DatabaseConfigurationExtensions.cs" />
+    <Compile Include="Entity\PetaPoco\DatabaseExtension.cs" />
+    <Compile Include="Entity\PetaPoco\DatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\EnglishInflector.cs" />
+    <Compile Include="Entity\PetaPoco\EnumMapper.cs" />
+    <Compile Include="Entity\PetaPoco\ExpandoColumn.cs" />
+    <Compile Include="Entity\PetaPoco\ExplicitColumnsAttribute.cs" />
+    <Compile Include="Entity\PetaPoco\FirebirdDbDatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\GridReader.cs" />
+    <Compile Include="Entity\PetaPoco\IAlterPoco.cs" />
+    <Compile Include="Entity\PetaPoco\IBuildConfigurationSettings.cs" />
+    <Compile Include="Entity\PetaPoco\IDatabase.cs" />
+    <Compile Include="Entity\PetaPoco\IDatabaseBuildConfiguration.cs" />
+    <Compile Include="Entity\PetaPoco\IExecute.cs" />
+    <Compile Include="Entity\PetaPoco\IgnoreAttribute.cs" />
+    <Compile Include="Entity\PetaPoco\IGridReader.cs" />
+    <Compile Include="Entity\PetaPoco\IHideObjectMethods.cs" />
+    <Compile Include="Entity\PetaPoco\IInflector.cs" />
+    <Compile Include="Entity\PetaPoco\IMapper.cs" />
+    <Compile Include="Entity\PetaPoco\Inflector.cs" />
+    <Compile Include="Entity\PetaPoco\IPagingHelper.cs" />
+    <Compile Include="Entity\PetaPoco\IProvider.cs" />
+    <Compile Include="Entity\PetaPoco\IQuery.cs" />
+    <Compile Include="Entity\PetaPoco\ITransaction.cs" />
+    <Compile Include="Entity\PetaPoco\ITransactionAccessor.cs" />
+    <Compile Include="Entity\PetaPoco\Mappers.cs" />
+    <Compile Include="Entity\PetaPoco\MariaDbDatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\MsAccessDbDatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\MultiPocoFactory.cs" />
+    <Compile Include="Entity\PetaPoco\MySqlDatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\OracleDatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\Page.cs" />
+    <Compile Include="Entity\PetaPoco\PagingHelper.cs" />
+    <Compile Include="Entity\PetaPoco\ParametersHelper.cs" />
+    <Compile Include="Entity\PetaPoco\PocoColumn.cs" />
+    <Compile Include="Entity\PetaPoco\PocoData.cs" />
+    <Compile Include="Entity\PetaPoco\PostgreSQLDatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\PrimaryKeyAttribute.cs" />
+    <Compile Include="Entity\PetaPoco\ResultColumnAttribute.cs" />
+    <Compile Include="Entity\PetaPoco\Singleton.cs" />
+    <Compile Include="Entity\PetaPoco\Sql.cs" />
+    <Compile Include="Entity\PetaPoco\SQLiteDatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\SQLParts.cs" />
+    <Compile Include="Entity\PetaPoco\SqlServerCEDatabaseProviders.cs" />
+    <Compile Include="Entity\PetaPoco\SqlServerDatabaseProvider.cs" />
+    <Compile Include="Entity\PetaPoco\TableInfo.cs" />
+    <Compile Include="Entity\PetaPoco\TableNameAttribute.cs" />
+    <Compile Include="Entity\PetaPoco\Transaction.cs" />
+    <Compile Include="Entity\PetaPoco\ValueConverterAttribute.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

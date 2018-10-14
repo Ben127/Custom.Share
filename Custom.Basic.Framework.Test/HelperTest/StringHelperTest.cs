@@ -39,11 +39,11 @@ namespace Custom.Basic.Framework.Test.HelperTest
 
 
         [Fact]
-        public void SubstringTest()
+        public void SubstrTest()
         {
             string source = "helloworld您好";
             string result = "helloworld";
-            Assert.Equal(result, source.Substr(0, 13));
+            Assert.Equal(result, source.Substr(0, 10));
         }
 
 
