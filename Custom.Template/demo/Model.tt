@@ -2,9 +2,9 @@
 <#@ include file="..\..\Custom.Template\include\PetaPoco.Core.ttinclude" #><#@ include file="..\..\Custom.Template\include\PetaPoco.MultiFile.ttinclude" #>
 <#
 	// Settings
-    ConnectionStringName = "SpaceWorker";			// Uses last connection string in config if not specified
-    Namespace = "SpaceWorker.Model";
-    RepoName = "SpaceWorker";
+    ConnectionStringName = "demo";			// Uses last connection string in config if not specified
+    Namespace = "demo.Model";
+    RepoName = "demo";
     GenerateOperations = true;
 	GeneratePocos = true;
 	GenerateCommon = true;
@@ -55,7 +55,7 @@ namespace <#=Namespace #>
 	public class <#=className#>
 	{
 		<# foreach(Column col in from c in tbl.Columns where !c.Ignore select c){ #>
-		/// <summary>
+/// <summary>
         /// <#=col.Description #>
         /// </summary>
 		public <#=col.PropertyType #><#=CheckNullable(col)#> <#=col.Name #> { get; set; }

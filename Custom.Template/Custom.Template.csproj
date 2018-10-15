@@ -64,6 +64,14 @@
     <Compile Include="commom\PetaPocoExtend.cs" />
     <Compile Include="CustomEngineHost.cs" />
     <Compile Include="commom\PetaPoco.cs" />
+    <Compile Include="demo\Model.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="demo\Test.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -98,9 +106,6 @@
     <None Include="include\PetaPoco.Core.ttinclude" />
     <None Include="include\PetaPoco.Generator.ttinclude" />
     <None Include="include\PetaPoco.MultiFile.ttinclude" />
-    <None Include="lib\PetaPoco.Core.ttinclude" />
-    <None Include="lib\PetaPoco.Generator.ttinclude" />
-    <None Include="lib\PetaPoco.MultiFile.ttinclude" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
