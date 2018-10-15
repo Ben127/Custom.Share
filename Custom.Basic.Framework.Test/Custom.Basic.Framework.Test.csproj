@@ -57,7 +57,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EntityTest\PetaPocoTest.cs" />
+    <Compile Include="HelperTest\DictionaryHelperTest.cs" />
+    <Compile Include="HelperTest\FileHelperTest.cs" />
     <Compile Include="HelperTest\StringHelperTest.cs" />
+    <Compile Include="ModelTest\TestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -62,8 +62,9 @@ namespace Custom.Basic.Framework.Helper
         /// <param name="str">字符串</param>
         /// <param name="start">开始位置</param>
         /// <param name="length">长度</param>
+        /// <param name="append">尾部追加</param>
         /// <returns></returns>
-        public static string Substr(this string str, int start, int length)
+        public static string Substr(this string str, int start, int length, string append)
         {
 
             if (start >= length)
@@ -87,6 +88,12 @@ namespace Custom.Basic.Framework.Helper
             }
 
             return str;
+        }
+
+
+        public static string Substr(this string str, int start, int length)
+        {
+            return Substr(str, start, length, "");
         }
 
         /// <summary>
