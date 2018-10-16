@@ -99,6 +99,7 @@
     <Compile Include="Entity\PetaPoco\Attribute\ValueConverterAttribute.cs" />
     <Compile Include="Helper\DictionaryHelper.cs" />
     <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\RegexHelper.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
