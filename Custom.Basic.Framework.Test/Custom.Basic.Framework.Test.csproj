@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonTest\CacheManageTest.cs" />
     <Compile Include="EntityTest\PetaPocoTest.cs" />
     <Compile Include="HelperTest\DictionaryHelperTest.cs" />
     <Compile Include="HelperTest\FileHelperTest.cs" />

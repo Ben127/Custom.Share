@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CacheManage.cs" />
+    <Compile Include="Common\ICache.cs" />
     <Compile Include="Entity\PetaPoco\AnsiString.cs" />
     <Compile Include="Entity\PetaPoco\ArrayKey.cs" />
     <Compile Include="Entity\PetaPoco\AutoSelectHelper.cs" />
