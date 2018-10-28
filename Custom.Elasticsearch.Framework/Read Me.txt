@@ -17,6 +17,7 @@
 
    
  二、ES插件
+   【2.X 版本】
    1 head 插件：用来浏览、与Elastic Search簇进行交互的web前端展示插件
    bin目录 cmd 输入 plugin install mobz/elasticsearch-head
       http://192.168.1.100:9200/_plugin/head/
@@ -36,6 +37,27 @@
    相应es对应版本 https://docs.search-guard.com/v5/search-guard-versions 查看，注【版本 ：换成/】
    官方介绍 https://docs.search-guard.com/latest/search-guard-installation
 
+   【6.X版本-head插件】
+	6.X 不支持命令行安装 head，且无法插件式安装需独立站点运行
+	前言：安装nodejs  https://nodejs.org/en/download/
+				nodejs安装根目录 npm install -g grunt -cli			[head插件需要用到grunt 命令]
+				es config elasticsearch.yml 添加配置：
+								http.cors.enabled: true
+								http.cors.allow-origin: "*"
 
+	下载head插件  https://github.com/mobz/elasticsearch-head clone 下载
+	 eg 编辑 Gruntfile.js 增加 hostname 
+			 connect: {
+					server: {
+						options: {
+							hostname:'192.168.1.100',
+							port: 9100,
+							base: '.',
+							keepalive: true
+						}
+					}
+				}
+
+	进入根目录 npm install  ， 然后 grunt server 启动head站点 输入 es ip 即可连接
 
 

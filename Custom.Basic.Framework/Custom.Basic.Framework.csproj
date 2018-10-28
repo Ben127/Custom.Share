@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\CacheManage.cs" />
+    <Compile Include="Common\CacheManager.cs" />
     <Compile Include="Common\ICache.cs" />
+    <Compile Include="Compiler\CompilerManager.cs" />
     <Compile Include="Entity\PetaPoco\AnsiString.cs" />
     <Compile Include="Entity\PetaPoco\ArrayKey.cs" />
     <Compile Include="Entity\PetaPoco\AutoSelectHelper.cs" />
@@ -100,7 +101,7 @@
     <Compile Include="Entity\PetaPoco\Transaction.cs" />
     <Compile Include="Entity\PetaPoco\Attribute\ValueConverterAttribute.cs" />
     <Compile Include="Helper\DictionaryHelper.cs" />
-    <Compile Include="Helper\FileHelper.cs" />
+    <Compile Include="Helper\LogHelper.cs" />
     <Compile Include="Helper\RegexHelper.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

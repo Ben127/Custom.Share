@@ -1,0 +1,16 @@
+﻿
+
+policy
+弹性和瞬态故障处理库
+
+install-package Polly -version 5.9.0
+>>
+重试策略（Retry）
+断路器（Circuit-breaker）
+超时（Timeout）
+隔板隔离（Bulkhead Isolation）
+缓存（Cache）
+回退（Fallback）
+策略包装（PolicyWrap）
+
+---------------------------------------------------------------------------------------------------

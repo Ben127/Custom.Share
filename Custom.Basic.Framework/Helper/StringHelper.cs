@@ -90,7 +90,13 @@ namespace Custom.Basic.Framework.Helper
             return str;
         }
 
-
+        /// <summary>
+        /// 从此实例检索子字符串。 子字符串从指定的字符位置开始且具有指定的长度。
+        /// </summary>
+        /// <param name="str">字符串</param>
+        /// <param name="start">开始位置</param>
+        /// <param name="length">长度</param>
+        /// <returns></returns>
         public static string Substr(this string str, int start, int length)
         {
             return Substr(str, start, length, "");
@@ -106,7 +112,6 @@ namespace Custom.Basic.Framework.Helper
         {
             return Substr(str, 0, length);
         }
-
 
     }
 }

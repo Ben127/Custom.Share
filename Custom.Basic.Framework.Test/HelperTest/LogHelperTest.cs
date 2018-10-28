@@ -12,7 +12,7 @@ namespace Custom.Basic.Framework.Test.HelperTest
     /// <summary>
     /// FileHelperTest
     /// </summary>
-    public class FileHelperTest
+    public class LogHelperTest
     {
 
         [Fact]
@@ -22,7 +22,8 @@ namespace Custom.Basic.Framework.Test.HelperTest
             string fileName = "test.log";
             string msg = "Hello world";
 
-            FileHelper.WriteLog(msg, fileName);
+            LogHelper.ErrorLog(msg);
+            LogHelper.InfoLog("程序测试....");
 
             // check file exists
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
@@ -30,7 +31,7 @@ namespace Custom.Basic.Framework.Test.HelperTest
             Assert.True(File.Exists(path));
 
             // check file content
-            string source = FileHelper.ReadFileContent(path);
+            string source = LogHelper.ReadContent(path);
             Assert.Equal(source, "Hello world\r\n");
 
         }

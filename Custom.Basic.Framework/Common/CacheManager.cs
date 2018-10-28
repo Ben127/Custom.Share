@@ -10,15 +10,15 @@ namespace Custom.Basic.Framework.Common
     /// <summary>
     /// CacheManage
     /// </summary>
-    public class CacheManage : ICache
+    public class CacheManager : ICache
     {
 
-        private CacheManage()
+        private CacheManager()
         {
 
         }
 
-        private static CacheManage Instance = new CacheManage();
+        private static CacheManager Instance = new CacheManager();
 
 
         /// <summary>

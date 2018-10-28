@@ -31,7 +31,7 @@ namespace Custom.Basic.Framework.Test.CommonTest
                 {4,"Nice"}
             };
 
-            CacheManage.Add<Enum_CacheKey, int, string>(Enum_CacheKey.Test, cacheList);
+            CacheManager.Add<Enum_CacheKey, int, string>(Enum_CacheKey.Test, cacheList);
 
             Dictionary<string, string> cacheList2 = new Dictionary<string, string>()
             {
@@ -40,7 +40,7 @@ namespace Custom.Basic.Framework.Test.CommonTest
                 {"sa","sa123"},
             };
 
-            CacheManage.Add<Enum_CacheKey, string, string>(Enum_CacheKey.Add, cacheList2);
+            CacheManager.Add<Enum_CacheKey, string, string>(Enum_CacheKey.Add, cacheList2);
 
         }
 
@@ -49,8 +49,8 @@ namespace Custom.Basic.Framework.Test.CommonTest
         public void AddTest()
         {
             Init();
-            var result = CacheManage.CacheView;
-            Assert.True(CacheManage.Exists(Enum_CacheKey.Test));
+            var result = CacheManager.CacheView;
+            Assert.True(CacheManager.Exists(Enum_CacheKey.Test));
         }
 
         [Fact(DisplayName = "获取一个字典项字典值")]
@@ -58,7 +58,7 @@ namespace Custom.Basic.Framework.Test.CommonTest
         {
             Init();
 
-            string result = CacheManage.Get<Enum_CacheKey, int, string>(Enum_CacheKey.Test, 1);
+            string result = CacheManager.Get<Enum_CacheKey, int, string>(Enum_CacheKey.Test, 1);
             Assert.Equal(result, "Hello");
 
         }
@@ -68,7 +68,7 @@ namespace Custom.Basic.Framework.Test.CommonTest
         {
             Init();
 
-            Assert.True(CacheManage.Remove(Enum_CacheKey.Test));
+            Assert.True(CacheManager.Remove(Enum_CacheKey.Test));
         }
 
         [Fact(DisplayName = "移除字典项Add 缓存的某个键")]
@@ -76,7 +76,7 @@ namespace Custom.Basic.Framework.Test.CommonTest
         {
             Init();
 
-            Assert.True(CacheManage.Remove<Enum_CacheKey, string, string>(Enum_CacheKey.Add, "sa"));
+            Assert.True(CacheManager.Remove<Enum_CacheKey, string, string>(Enum_CacheKey.Add, "sa"));
         }
 
         [Fact(DisplayName = "清空缓存", Skip = "暂不测试")]
@@ -84,9 +84,9 @@ namespace Custom.Basic.Framework.Test.CommonTest
         {
             Init();
 
-            CacheManage.ClearAll();
+            CacheManager.ClearAll();
 
-            Assert.True(CacheManage.CacheView.Count == 0);
+            Assert.True(CacheManager.CacheView.Count == 0);
         }
 
 
