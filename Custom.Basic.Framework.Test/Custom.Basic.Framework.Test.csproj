@@ -66,6 +66,7 @@
     <Compile Include="HelperTest\StringHelperTest.cs" />
     <Compile Include="ModelTest\TestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilitiesTest\EncryptionUtilityTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Custom.Basic.Framework\Custom.Basic.Framework.csproj">

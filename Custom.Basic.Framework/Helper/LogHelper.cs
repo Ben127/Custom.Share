@@ -49,8 +49,7 @@ namespace Custom.Basic.Framework.Helper
                 {
                     using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
                     {
-                        sw.WriteLine(string.Format("{0}: {1}", typeName, msg));
-                        sw.WriteLine(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                        sw.WriteLine(string.Format("[{0} {1}]: {2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), typeName, msg));
                         sw.WriteLine("---------------------------------------------------------");
                     }
                 }
