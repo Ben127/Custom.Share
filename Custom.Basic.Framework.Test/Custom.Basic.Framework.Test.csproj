@@ -61,9 +61,11 @@
     <Compile Include="CompilerTest\CompilerManagerTest.cs" />
     <Compile Include="EntityTest\PetaPocoTest.cs" />
     <Compile Include="HelperTest\DictionaryHelperTest.cs" />
+    <Compile Include="HelperTest\JsonHelperTest.cs" />
     <Compile Include="HelperTest\LogHelperTest.cs" />
     <Compile Include="HelperTest\RegexHelperTest.cs" />
     <Compile Include="HelperTest\StringHelperTest.cs" />
+    <Compile Include="HelperTest\XmlHelprtTest.cs" />
     <Compile Include="ModelTest\TestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilitiesTest\EncryptionUtilityTest.cs" />
