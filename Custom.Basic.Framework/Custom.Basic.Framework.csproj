@@ -111,6 +111,8 @@
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Helper\XmlHelper.cs" />
     <Compile Include="Json\PropertySerializeContractResolver.cs" />
+    <Compile Include="Package\Excel\ExcelEpplusManager.cs" />
+    <Compile Include="Package\Web\HtmlAgPackXpathManager.cs" />
     <Compile Include="Pinvoke\Enum\AnimateWindowFlags.cs" />
     <Compile Include="Pinvoke\Enum\InternetGetConnectedStateFlags.cs" />
     <Compile Include="Pinvoke\User32Extension.cs" />
@@ -123,6 +125,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Package\Json\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
