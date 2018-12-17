@@ -68,6 +68,7 @@
     <Compile Include="HelperTest\XmlHelprtTest.cs" />
     <Compile Include="ModelTest\TestModel.cs" />
     <Compile Include="PackageTest\ExcelEpplusManagerTest.cs" />
+    <Compile Include="PackageTest\RedisManagerTest.cs" />
     <Compile Include="PackageTest\RestSharpManagerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UtilitiesTest\EncryptionUtilityTest.cs" />

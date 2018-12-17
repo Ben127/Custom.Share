@@ -124,6 +124,9 @@
     <Compile Include="Helper\XmlHelper.cs" />
     <Compile Include="Json\PropertySerializeContractResolver.cs" />
     <Compile Include="Package\Excel\ExcelEpplusManager.cs" />
+    <Compile Include="Package\Redis\EnumRedis.cs" />
+    <Compile Include="Package\Redis\RedisConnectionHelp.cs" />
+    <Compile Include="Package\Redis\RedisManager.cs" />
     <Compile Include="Package\Web\HtmlAgPackXpathManager.cs" />
     <Compile Include="Package\Web\RestSharpManager.cs" />
     <Compile Include="Pinvoke\Enum\AnimateWindowFlags.cs" />
@@ -137,6 +140,7 @@
     <Content Include="Read Me.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
