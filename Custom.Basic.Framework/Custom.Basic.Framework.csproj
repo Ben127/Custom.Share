@@ -134,8 +134,8 @@
     <Compile Include="Json\PropertySerializeContractResolver.cs" />
     <Compile Include="Package\Excel\ExcelEpplusManager.cs" />
     <Compile Include="Package\Policy\PolicyManager.cs" />
-    <Compile Include="Package\Redis\EnumRedis.cs" />
-    <Compile Include="Package\Redis\RedisConnectionHelp.cs" />
+    <Compile Include="Package\Redis\RedisConfig.cs" />
+    <Compile Include="Package\Redis\RedisEnum.cs" />
     <Compile Include="Package\Redis\RedisManager.cs" />
     <Compile Include="Package\Web\HtmlAgPackXpathManager.cs" />
     <Compile Include="Package\Web\RestSharpManager.cs" />

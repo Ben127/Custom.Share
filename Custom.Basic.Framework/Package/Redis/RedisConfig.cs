@@ -5,29 +5,24 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Custom.Basic.Framework.Package.Redis
 {
-    /// <summary>
-    /// ConnectionMultiplexer
-    /// </summary>
-    public class RedisConnectionHelp
+    internal class RedisConfig
     {
-        //系统自定义Key前缀
-        public static readonly string SysCustomKey = ConfigurationManager.AppSettings["redisKey"] ?? "";
-
         //"127.0.0.1:6379,allowadmin=true
-        private static readonly string RedisConnectionString = ConfigurationManager.ConnectionStrings["RedisExchangeHosts"].ConnectionString;
+        private static readonly string RedisConnectionString = ConfigurationManager.ConnectionStrings["RedisHosts"].ConnectionString;
 
         private static readonly object Locker = new object();
         private static ConnectionMultiplexer _instance;
         private static readonly ConcurrentDictionary<string, ConnectionMultiplexer> ConnectionCache = new ConcurrentDictionary<string, ConnectionMultiplexer>();
 
+        ///----------------------
+        ///
         /// <summary>
         /// 单例获取
         /// </summary>
-        public static ConnectionMultiplexer Instance
+        internal static ConnectionMultiplexer Instance
         {
             get
             {
@@ -50,7 +45,7 @@ namespace Custom.Basic.Framework.Package.Redis
         /// </summary>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static ConnectionMultiplexer GetConnectionMultiplexer(string connectionString)
+        internal static ConnectionMultiplexer GetConnectionMultiplexer(string connectionString)
         {
             if (!ConnectionCache.ContainsKey(connectionString))
             {

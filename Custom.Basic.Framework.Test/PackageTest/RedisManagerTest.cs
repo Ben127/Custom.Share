@@ -13,110 +13,59 @@ namespace Custom.Basic.Framework.Test.PackageTest
     /// </summary>
     public class RedisManagerTest
     {
-        [Fact]
-        public void RedisTest()
-        {
-            RedisManager redis = new RedisManager();
-
-            User user = new User() { UserId = 10000, UserName = "admin", Password = "123456" };
-
-            string str = "Hello world";
-            redis.StringSet("redis_string_test", str);
-
-            string str2 = redis.StringGet("redis_string_test");
-            Assert.Equal(str, str2);
-
-
-        }
-
 
         [Fact(DisplayName = "字符串")]
         public void StringTest()
         {
             RedisManager redis = new RedisManager();
-            string str = "Hello world";
-            redis.StringSet("redis_string_test", str);
-
-            string str2 = redis.StringGet("redis_string_test");
-            Assert.Equal(str, str2);
-
-        }
-
-
-        [Fact]
-        public void String2Test()
-        {
-            RedisManager redis = new RedisManager();
-            User user = new User() { UserId = 10000, UserName = "admin", Password = "123456" };
-            redis.StringSet("redis_string_model1", user, TimeSpan.FromSeconds(10));
-
-        }
-
-
-        [Fact(DisplayName = "实体")]
-        public void ModelTest()
-        {
-            RedisManager redis = new RedisManager();
-            User user = new User() { UserId = 10000, UserName = "admin", Password = "123456" };
-
-
-            redis.StringSet("redis_model_test", user);
-
-            User user2 = redis.StringGet<User>("redis_model_test");
-
-            Assert.Equal(user.UserId, user2.UserId);
-        }
-
-
-        [Fact]
-        public void ListTest()
-        {
-            RedisManager redis = new RedisManager();
-            for (int i = 0; i < 10; i++)
+            List<Bus> listData = new List<Bus>()
             {
-                redis.ListRightPush("list", i);
-            }
-            for (int i = 10; i < 20; i++)
+                new Bus(){ BusId=1, BusName="汽车1", Score=89},
+                new Bus(){ BusId=2, BusName="汽车2", Score=43},
+                new Bus(){ BusId=3, BusName="汽车3", Score=54},
+                new Bus(){ BusId=4, BusName="汽车4", Score=32}
+            };
+
+            var result = redis.StringGetCollection<Bus>(new List<string> { "test:string:bus" });
+            Assert.True(result.Count > 0);
+
+        }
+
+
+        [Fact(DisplayName = "HashTest")]
+        public void HashTest()
+        {
+            RedisManager redis = new RedisManager();
+            List<Bus> listData = new List<Bus>()
             {
-                redis.ListLeftPush("list", i);
-            }
-            var length = redis.ListLength("list");
-            Assert.True(length == 20);
+                new Bus(){ BusId=1, BusName="汽车1", Score=89},
+                new Bus(){ BusId=2, BusName="汽车2", Score=43},
+                new Bus(){ BusId=3, BusName="汽车3", Score=54},
+                new Bus(){ BusId=4, BusName="汽车4", Score=32}
+            };
 
-            var leftpop = redis.ListLeftPop<string>("list");
-            var rightPop = redis.ListRightPop<string>("list");
-
-            var list = redis.ListRange<int>("list");
-
+            var result = redis.HashKeys<Bus>("test:hash:bus");
+            Assert.True(result.Count > 0);
         }
 
 
         [Fact]
-        public void HashSetTest()
+        public void SortSetTest()
         {
             RedisManager redis = new RedisManager();
 
-            redis.HashSet("user", "u1", "123");
-            redis.HashSet("user", "u2", "1234");
-            redis.HashSet("user", "u3", "1235");
-            var news = redis.HashGet<string>("user", "u2");
-        }
-
-
-        [Fact]
-        public void SubscribeTest()
-        {
-            RedisManager redis = new RedisManager();
-            redis.Subscribe("Channel1");
-            for (int i = 0; i < 10; i++)
+            List<Bus> listData = new List<Bus>()
             {
-                redis.Publish("Channel1", "msg" + i);
-                if (i == 2)
-                {
-                    redis.Unsubscribe("Channel1");
-                }
-            }
+                new Bus(){ BusId=1, BusName="汽车1", Score=89},
+                new Bus(){ BusId=2, BusName="汽车2", Score=43},
+                new Bus(){ BusId=3, BusName="汽车3", Score=54},
+                new Bus(){ BusId=4, BusName="汽车4", Score=32}
+            };
+
+            var result = redis.SortSetGet<Bus>("test:sortset:bus");
+            Assert.True(result.Count > 0);
         }
+
 
 
         public class User
@@ -124,6 +73,14 @@ namespace Custom.Basic.Framework.Test.PackageTest
             public int UserId { get; set; }
             public string UserName { get; set; }
             public string Password { get; set; }
+        }
+
+        public class Bus
+        {
+            public int BusId { get; set; }
+            public string BusName { get; set; }
+            public decimal Score { get; set; }
+
         }
 
 

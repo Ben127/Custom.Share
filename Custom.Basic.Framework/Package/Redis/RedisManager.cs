@@ -1,942 +1,485 @@
 ﻿using Newtonsoft.Json;
 using StackExchange.Redis;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Custom.Basic.Framework.Package.Redis
 {
-    /// <summary>
-    /// RedisManger
-    /// </summary>
     public class RedisManager
     {
-        private EnumRedis DbNum { get; set; }
-        private ConnectionMultiplexer _conn;
-        public string CustomKey;
-
-        #region 构造函数
-
-        public RedisManager(EnumRedis dbNum = EnumRedis.Default)
-            : this(dbNum, null)
+        private ConnectionMultiplexer _connectionMult;
+        public RedisManager() :
+            this(null)
         {
-        }
 
-        public RedisManager(EnumRedis dbNum, string readWriteHosts)
-        {
-            DbNum = dbNum;
-            _conn = string.IsNullOrWhiteSpace(readWriteHosts) ? RedisConnectionHelp.Instance : RedisConnectionHelp.GetConnectionMultiplexer(readWriteHosts);
-        }
-
-        #endregion 构造函数
-
-        #region String
-
-        #region 同步方法
-
-        /// <summary>
-        /// 保存单个key value
-        /// </summary>
-        /// <param name="key">Redis Key</param>
-        /// <param name="value">保存的值</param>
-        /// <param name="expiry">过期时间</param>
-        /// <returns></returns>
-        public bool StringSet(string key, string value, TimeSpan? expiry = default(TimeSpan?))
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.StringSet(key, value, expiry));
         }
 
         /// <summary>
-        /// 保存多个key value
+        /// Redis 操作
         /// </summary>
-        /// <param name="keyValues">键值对</param>
-        /// <returns></returns>
-        public bool StringSet(List<KeyValuePair<RedisKey, RedisValue>> keyValues)
+        public RedisManager(string connectionString)
         {
-            List<KeyValuePair<RedisKey, RedisValue>> newkeyValues =
-                keyValues.Select(p => new KeyValuePair<RedisKey, RedisValue>(AddSysCustomKey(p.Key), p.Value)).ToList();
-            return Do(db => db.StringSet(newkeyValues.ToArray()));
+            this._connectionMult = string.IsNullOrEmpty(connectionString) ? RedisConfig.Instance : RedisConfig.GetConnectionMultiplexer(connectionString);
         }
 
-        /// <summary>
-        /// 保存一个对象
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="obj"></param>
-        /// <param name="expiry"></param>
-        /// <returns></returns>
-        public bool StringSet<T>(string key, T obj, TimeSpan? expiry = default(TimeSpan?))
-        {
-            key = AddSysCustomKey(key);
-            string json = ConvertJson(obj);
-            return Do(db => db.StringSet(key, json, expiry));
-        }
 
-        /// <summary>
-        /// 获取单个key的值
-        /// </summary>
-        /// <param name="key">Redis Key</param>
-        /// <returns></returns>
-        public string StringGet(string key)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.StringGet(key));
-        }
-
-        /// <summary>
-        /// 获取多个Key
-        /// </summary>
-        /// <param name="listKey">Redis Key集合</param>
-        /// <returns></returns>
-        public RedisValue[] StringGet(List<string> listKey)
-        {
-            List<string> newKeys = listKey.Select(AddSysCustomKey).ToList();
-            return Do(db => db.StringGet(ConvertRedisKeys(newKeys)));
-        }
-
-        /// <summary>
-        /// 获取一个key的对象
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public T StringGet<T>(string key)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => ConvertObj<T>(db.StringGet(key)));
-        }
-
-        /// <summary>
-        /// 为数字增长val
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="val">可以为负</param>
-        /// <returns>增长后的值</returns>
-        public double StringIncrement(string key, double val = 1)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.StringIncrement(key, val));
-        }
-
-        /// <summary>
-        /// 为数字减少val
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="val">可以为负</param>
-        /// <returns>减少后的值</returns>
-        public double StringDecrement(string key, double val = 1)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.StringDecrement(key, val));
-        }
-
-        #endregion 同步方法
-
-        #region 异步方法
-
-        /// <summary>
-        /// 保存单个key value
-        /// </summary>
-        /// <param name="key">Redis Key</param>
-        /// <param name="value">保存的值</param>
-        /// <param name="expiry">过期时间</param>
-        /// <returns></returns>
-        public async Task<bool> StringSetAsync(string key, string value, TimeSpan? expiry = default(TimeSpan?))
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.StringSetAsync(key, value, expiry));
-        }
-
-        /// <summary>
-        /// 保存多个key value
-        /// </summary>
-        /// <param name="keyValues">键值对</param>
-        /// <returns></returns>
-        public async Task<bool> StringSetAsync(List<KeyValuePair<RedisKey, RedisValue>> keyValues)
-        {
-            List<KeyValuePair<RedisKey, RedisValue>> newkeyValues =
-                keyValues.Select(p => new KeyValuePair<RedisKey, RedisValue>(AddSysCustomKey(p.Key), p.Value)).ToList();
-            return await Do(db => db.StringSetAsync(newkeyValues.ToArray()));
-        }
-
-        /// <summary>
-        /// 保存一个对象
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="obj"></param>
-        /// <param name="expiry"></param>
-        /// <returns></returns>
-        public async Task<bool> StringSetAsync<T>(string key, T obj, TimeSpan? expiry = default(TimeSpan?))
-        {
-            key = AddSysCustomKey(key);
-            string json = ConvertJson(obj);
-            return await Do(db => db.StringSetAsync(key, json, expiry));
-        }
-
-        /// <summary>
-        /// 获取单个key的值
-        /// </summary>
-        /// <param name="key">Redis Key</param>
-        /// <returns></returns>
-        public async Task<string> StringGetAsync(string key)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.StringGetAsync(key));
-        }
-
-        /// <summary>
-        /// 获取多个Key
-        /// </summary>
-        /// <param name="listKey">Redis Key集合</param>
-        /// <returns></returns>
-        public async Task<RedisValue[]> StringGetAsync(List<string> listKey)
-        {
-            List<string> newKeys = listKey.Select(AddSysCustomKey).ToList();
-            return await Do(db => db.StringGetAsync(ConvertRedisKeys(newKeys)));
-        }
-
-        /// <summary>
-        /// 获取一个key的对象
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public async Task<T> StringGetAsync<T>(string key)
-        {
-            key = AddSysCustomKey(key);
-            string result = await Do(db => db.StringGetAsync(key));
-            return ConvertObj<T>(result);
-        }
-
-        /// <summary>
-        /// 为数字增长val
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="val">可以为负</param>
-        /// <returns>增长后的值</returns>
-        public async Task<double> StringIncrementAsync(string key, double val = 1)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.StringIncrementAsync(key, val));
-        }
-
-        /// <summary>
-        /// 为数字减少val
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="val">可以为负</param>
-        /// <returns>减少后的值</returns>
-        public async Task<double> StringDecrementAsync(string key, double val = 1)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.StringDecrementAsync(key, val));
-        }
-
-        #endregion 异步方法
-
-        #endregion String
 
         #region Hash
 
-        #region 同步方法
-
         /// <summary>
-        /// 判断某个数据是否已经被缓存
+        /// 设置Hash 
+        ///        集合Value
+        /// <param name="dataKeyFunc">Hash 键值</param>
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <returns></returns>
-        public bool HashExists(string key, string dataKey)
+        public bool HashSet<T>(string redisKey, List<T> listData, Func<T, string> dataKeyFunc, TimeSpan? timespan = null)
         {
-            key = AddSysCustomKey(key);
-            return Do(db => db.HashExists(key, dataKey));
+            return Do(redis =>
+                                    {
+                                        var batch = redis.CreateBatch();
+                                        foreach (var v in listData)
+                                        {
+                                            string redisValue = ConvertJson<T>(v);
+                                            batch.HashSetAsync(redisKey, dataKeyFunc(v), redisValue);
+                                        }
+
+                                        batch.Execute();
+
+                                        if (timespan.HasValue)
+                                        {
+                                            redis.KeyExpire(redisKey, timespan);
+                                        }
+
+                                        return true;
+                                    });
         }
 
         /// <summary>
-        /// 存储数据到hash表
+        /// 设置Hash 单个
+        ///        单模型  Value
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        public bool HashSet<T>(string key, string dataKey, T t)
+        public bool HashSet<T>(string redisKey, string dataKey, T model, TimeSpan? timespan = null)
         {
-            key = AddSysCustomKey(key);
-            return Do(db =>
-            {
-                string json = ConvertJson(t);
-                return db.HashSet(key, dataKey, json);
-            });
+            return Do(redis =>
+                                    {
+                                        string json = ConvertJson<T>(model);
+                                        bool setSuccess = redis.HashSet(redisKey, dataKey, json);
+                                        if (setSuccess && timespan.HasValue)
+                                        {
+                                            redis.KeyExpire(redisKey, DateTime.Now.Add(timespan.Value));
+                                        }
+
+                                        return setSuccess;
+                                    });
+        }
+
+
+        /// <summary>
+        /// 删除Hash 
+        /// </summary>
+        public bool HashDelete(string redisKey, List<int> dataKeys)
+        {
+            return Do(redis =>
+                                    {
+                                        RedisValue[] redisValues = dataKeys.Select(p => (RedisValue)p.ToString()).ToArray();
+                                        return redis.HashDelete(redisKey, redisValues) > 0;
+                                    });
+
+        }
+
+
+        /// <summary>
+        /// 是否存在 Hash
+        /// </summary>
+        public bool HashExists(string redisKey, string dataKey)
+        {
+            return Do(redis =>
+                                    {
+                                        return redis.HashExists(redisKey, dataKey);
+                                    });
+        }
+
+
+        /// <summary>
+        /// 获取Hash 长度
+        /// </summary>
+        /// <returns></returns>
+        public long HashLength(string redisKey)
+        {
+            return Do(redis =>
+                                    {
+                                        return redis.HashLength(redisKey);
+                                    });
         }
 
         /// <summary>
-        /// 移除hash中的某值
+        /// Hash 某键值增量
         /// </summary>
-        /// <param name="key"></param>
         /// <param name="dataKey"></param>
-        /// <returns></returns>
-        public bool HashDelete(string key, string dataKey)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.HashDelete(key, dataKey));
-        }
-
-        /// <summary>
-        /// 移除hash中的多个值
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="dataKeys"></param>
-        /// <returns></returns>
-        public long HashDelete(string key, List<RedisValue> dataKeys)
-        {
-            key = AddSysCustomKey(key);
-            //List<RedisValue> dataKeys1 = new List<RedisValue>() {"1","2"};
-            return Do(db => db.HashDelete(key, dataKeys.ToArray()));
-        }
-
-        /// <summary>
-        /// 从hash表获取数据
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <returns></returns>
-        public T HashGet<T>(string key, string dataKey)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db =>
-            {
-                string value = db.HashGet(key, dataKey);
-                return ConvertObj<T>(value);
-            });
-        }
-
-        /// <summary>
-        /// 为数字增长val
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <param name="val">可以为负</param>
         /// <returns>增长后的值</returns>
-        public double HashIncrement(string key, string dataKey, double val = 1)
+        public long HashIncrement(string redisKey, string dataKey, long value = 1)
         {
-            key = AddSysCustomKey(key);
-            return Do(db => db.HashIncrement(key, dataKey, val));
+            return Do(redis =>
+                                    {
+                                        return redis.HashIncrement(redisKey, dataKey, value);
+                                    });
         }
 
+
         /// <summary>
-        /// 为数字减少val
+        /// Hash 某键值减量
         /// </summary>
-        /// <param name="key"></param>
         /// <param name="dataKey"></param>
-        /// <param name="val">可以为负</param>
-        /// <returns>减少后的值</returns>
-        public double HashDecrement(string key, string dataKey, double val = 1)
+        /// <returns>减量后的值</returns>
+        public long HashDecrement(string redisKey, string dataKey, long val = 1)
         {
-            key = AddSysCustomKey(key);
-            return Do(db => db.HashDecrement(key, dataKey, val));
+            return Do(redis =>
+                                    {
+                                        return redis.HashDecrement(redisKey, dataKey, val);
+                                    });
         }
+
 
         /// <summary>
-        /// 获取hashkey所有Redis key
+        /// 获取Hash所有键
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public List<T> HashKeys<T>(string key)
+        public List<T> HashKeys<T>(string redisKey)
         {
-            key = AddSysCustomKey(key);
-            return Do(db =>
-            {
-                RedisValue[] values = db.HashKeys(key);
-                return ConvetList<T>(values);
-            });
+            return Do(redis =>
+                                    {
+                                        RedisValue[] redisValue = redis.HashKeys(redisKey);
+                                        return ConvertCollection<T>(redisValue);
+                                    });
         }
 
-        #endregion 同步方法
-
-        #region 异步方法
 
         /// <summary>
-        /// 判断某个数据是否已经被缓存
+        /// 获取Hash所有值
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <returns></returns>
-        public async Task<bool> HashExistsAsync(string key, string dataKey)
+        public List<T> HashValues<T>(string redisKey)
         {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.HashExistsAsync(key, dataKey));
+            return Do(redis =>
+                                    {
+                                        RedisValue[] redisValues = redis.HashValues(redisKey);
+                                        return ConvertCollection<T>(redisValues);
+                                    });
         }
 
-        /// <summary>
-        /// 存储数据到hash表
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <param name="t"></param>
-        /// <returns></returns>
-        public async Task<bool> HashSetAsync<T>(string key, string dataKey, T t)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db =>
-            {
-                string json = ConvertJson(t);
-                return db.HashSetAsync(key, dataKey, json);
-            });
-        }
 
-        /// <summary>
-        /// 移除hash中的某值
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <returns></returns>
-        public async Task<bool> HashDeleteAsync(string key, string dataKey)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.HashDeleteAsync(key, dataKey));
-        }
-
-        /// <summary>
-        /// 移除hash中的多个值
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="dataKeys"></param>
-        /// <returns></returns>
-        public async Task<long> HashDeleteAsync(string key, List<RedisValue> dataKeys)
-        {
-            key = AddSysCustomKey(key);
-            //List<RedisValue> dataKeys1 = new List<RedisValue>() {"1","2"};
-            return await Do(db => db.HashDeleteAsync(key, dataKeys.ToArray()));
-        }
-
-        /// <summary>
-        /// 从hash表获取数据
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <returns></returns>
-        public async Task<T> HashGeAsync<T>(string key, string dataKey)
-        {
-            key = AddSysCustomKey(key);
-            string value = await Do(db => db.HashGetAsync(key, dataKey));
-            return ConvertObj<T>(value);
-        }
-
-        /// <summary>
-        /// 为数字增长val
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <param name="val">可以为负</param>
-        /// <returns>增长后的值</returns>
-        public async Task<double> HashIncrementAsync(string key, string dataKey, double val = 1)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.HashIncrementAsync(key, dataKey, val));
-        }
-
-        /// <summary>
-        /// 为数字减少val
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="dataKey"></param>
-        /// <param name="val">可以为负</param>
-        /// <returns>减少后的值</returns>
-        public async Task<double> HashDecrementAsync(string key, string dataKey, double val = 1)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.HashDecrementAsync(key, dataKey, val));
-        }
-
-        /// <summary>
-        /// 获取hashkey所有Redis key
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public async Task<List<T>> HashKeysAsync<T>(string key)
-        {
-            key = AddSysCustomKey(key);
-            RedisValue[] values = await Do(db => db.HashKeysAsync(key));
-            return ConvetList<T>(values);
-        }
-
-        #endregion 异步方法
-
-        #endregion Hash
+        #endregion
 
         #region List
 
-        #region 同步方法
 
         /// <summary>
-        /// 移除指定ListId的内部List的值
+        ///  List列表中删除第一次count出现的元素 
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void ListRemove<T>(string key, T value)
+        /// <param name="value">将要移除的值</param>
+        /// <param name="count">
+        ///     count > 0：删除等于value从头到尾移动的元素。
+        ///     count < 0：删除等于value从尾部移动到头部的元素。
+        ///     count = 0：删除所有等于的元素value。
+        /// </param>
+        public long ListRemove(string redisKey, string redisValue, long count = 0)
         {
-            key = AddSysCustomKey(key);
-            Do(db => db.ListRemove(key, ConvertJson(value)));
+            return Do(redis =>
+                                    {
+                                        return redis.ListRemove(redisKey, redisValue ?? "", count);
+                                    });
+        }
+
+
+        /// <summary>
+        ///  获取 List 某键
+        /// </summary>
+        public T ListGetByIndex<T>(string redisKey)
+        {
+            return Do(redis =>
+                                    {
+                                        RedisValue redisValue = redis.ListGetByIndex(redisKey, 0);
+                                        return ConvertObj<T>(redisValue);
+                                    });
+        }
+
+
+        /// <summary>
+        /// 设置Redis 批量list类型值
+        ///     入栈，元素逐个添加到头部
+        /// </summary>
+        public bool ListSetLeftPushCollection<T>(string redisKey, List<T> listData, TimeSpan? timespan)
+        {
+            return Do(redis =>
+                                        {
+                                            var batch = redis.CreateBatch();
+                                            listData.ForEach((item) =>
+                                            {
+                                                var task = batch.ListLeftPushAsync(redisKey, ConvertJson<T>(item));
+                                                if (timespan.HasValue)
+                                                {
+                                                    redis.KeyExpire(redisKey, timespan);
+                                                }
+                                            });
+                                            batch.Execute();
+
+                                            return true;
+
+                                        });
         }
 
         /// <summary>
-        /// 获取指定key的List
+        /// 设置Redis 批量list类型值
+        ///     入队，元素逐个添加到尾部
         /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public List<T> ListRange<T>(string key)
+        public bool ListSetRightPushCollection<T>(string redisKey, List<T> listData, TimeSpan? timespan)
         {
-            key = AddSysCustomKey(key);
+            return Do(redis =>
+                                    {
+                                        var batch = redis.CreateBatch();
+                                        listData.ForEach((item) =>
+                                        {
+                                            var task = batch.ListRightPushAsync(redisKey, ConvertJson<T>(item));
+                                            if (timespan.HasValue)
+                                            {
+                                                redis.KeyExpire(redisKey, timespan);
+                                            }
+                                        });
+                                        batch.Execute();
+
+                                        return true;
+
+                                    });
+        }
+
+
+        #endregion
+
+        #region String
+
+        /// <summary>
+        ///  获取Redis 单个string类型值
+        /// </summary>
+        public T StringGet<T>(string redisKey)
+        {
+            return Do(redis =>
+                                    {
+                                        RedisValue redisValue = redis.StringGet(redisKey);
+                                        return ConvertObj<T>(redisValue);
+                                    });
+        }
+
+        /// <summary>
+        /// 获取Redis 多个string类型值
+        /// </summary>
+        public List<T> StringGetCollection<T>(List<string> redisKey)
+        {
+            return Do(redis =>
+                                    {
+                                        RedisKey[] redisKeys = redisKey.Select(p => (RedisKey)p.ToString()).ToArray();
+                                        RedisValue[] redisValues = redis.StringGet(redisKeys);
+                                        return ConvertCollection<T>(redisValues);
+                                    });
+
+        }
+
+
+        /// <summary>
+        ///  设置Redis 批量string类型值
+        ///         pipe管道
+        /// </summary>
+        public bool StringSetCollection<T>(List<T> listData, Func<T, string> redisKeyFunc, TimeSpan? timespan)
+        {
             return Do(redis =>
             {
-                var values = redis.ListRange(key);
-                return ConvetList<T>(values);
+                var batch = redis.CreateBatch();
+                listData.ForEach((item) =>
+                {
+                    batch.StringSetAsync(redisKeyFunc(item), ConvertJson<T>(item), timespan);
+                });
+                batch.Execute();
+
+                return true;
             });
         }
 
+
+        #endregion
+
+        #region Set     不重复的组合，集合型数据，无顺序
+
         /// <summary>
-        /// 入队
+        /// 获取Redis Set 列表
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void ListRightPush<T>(string key, T value)
+        public List<T> SetGetCollection<T>(string redisKey)
         {
-            key = AddSysCustomKey(key);
-            Do(db => db.ListRightPush(key, ConvertJson(value)));
+            return Do(redis =>
+                                    {
+                                        RedisValue[] redisValue = redis.SetMembers(redisKey).ToArray();
+                                        return ConvertCollection<T>(redisValue);
+                                    });
         }
 
         /// <summary>
-        /// 出队
+        /// 设置Redis Set 列表
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public T ListRightPop<T>(string key)
+        public bool SetSetCollection<T>(string redisKey, List<T> listData, TimeSpan? timespan)
         {
-            key = AddSysCustomKey(key);
-            return Do(db =>
-            {
-                var value = db.ListRightPop(key);
-                return ConvertObj<T>(value);
-            });
-        }
-
-        /// <summary>
-        /// 入栈
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public void ListLeftPush<T>(string key, T value)
-        {
-            key = AddSysCustomKey(key);
-            Do(db => db.ListLeftPush(key, ConvertJson(value)));
-        }
-
-        /// <summary>
-        /// 出栈
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public T ListLeftPop<T>(string key)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db =>
-            {
-                var value = db.ListLeftPop(key);
-                return ConvertObj<T>(value);
-            });
-        }
-
-        /// <summary>
-        /// 获取集合中的数量
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public long ListLength(string key)
-        {
-            key = AddSysCustomKey(key);
-            return Do(redis => redis.ListLength(key));
-        }
-
-        #endregion 同步方法
-
-        #region 异步方法
-
-        /// <summary>
-        /// 移除指定ListId的内部List的值
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public async Task<long> ListRemoveAsync<T>(string key, T value)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.ListRemoveAsync(key, ConvertJson(value)));
-        }
-
-        /// <summary>
-        /// 获取指定key的List
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public async Task<List<T>> ListRangeAsync<T>(string key)
-        {
-            key = AddSysCustomKey(key);
-            var values = await Do(redis => redis.ListRangeAsync(key));
-            return ConvetList<T>(values);
-        }
-
-        /// <summary>
-        /// 入队
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public async Task<long> ListRightPushAsync<T>(string key, T value)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.ListRightPushAsync(key, ConvertJson(value)));
-        }
-
-        /// <summary>
-        /// 出队
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public async Task<T> ListRightPopAsync<T>(string key)
-        {
-            key = AddSysCustomKey(key);
-            var value = await Do(db => db.ListRightPopAsync(key));
-            return ConvertObj<T>(value);
-        }
-
-        /// <summary>
-        /// 入栈
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public async Task<long> ListLeftPushAsync<T>(string key, T value)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(db => db.ListLeftPushAsync(key, ConvertJson(value)));
-        }
-
-        /// <summary>
-        /// 出栈
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public async Task<T> ListLeftPopAsync<T>(string key)
-        {
-            key = AddSysCustomKey(key);
-            var value = await Do(db => db.ListLeftPopAsync(key));
-            return ConvertObj<T>(value);
-        }
-
-        /// <summary>
-        /// 获取集合中的数量
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public async Task<long> ListLengthAsync(string key)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(redis => redis.ListLengthAsync(key));
-        }
-
-        #endregion 异步方法
-
-        #endregion List
-
-        #region SortedSet 有序集合
-
-        #region 同步方法
-
-        /// <summary>
-        /// 添加
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="score"></param>
-        public bool SortedSetAdd<T>(string key, T value, double score)
-        {
-            key = AddSysCustomKey(key);
-            return Do(redis => redis.SortedSetAdd(key, ConvertJson<T>(value), score));
-        }
-
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public bool SortedSetRemove<T>(string key, T value)
-        {
-            key = AddSysCustomKey(key);
-            return Do(redis => redis.SortedSetRemove(key, ConvertJson(value)));
-        }
-
-        /// <summary>
-        /// 获取全部
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public List<T> SortedSetRangeByRank<T>(string key)
-        {
-            key = AddSysCustomKey(key);
             return Do(redis =>
             {
-                var values = redis.SortedSetRangeByRank(key);
-                return ConvetList<T>(values);
+                var batch = redis.CreateBatch();
+                listData.ForEach((item) =>
+                {
+                    batch.SetAddAsync(redisKey, ConvertJson<T>(item));
+                });
+                batch.Execute();
+                if (timespan.HasValue)
+                {
+                    redis.KeyExpire(redisKey, timespan);
+                }
+
+                return true;
             });
         }
 
-        /// <summary>
-        /// 获取集合中的数量
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public long SortedSetLength(string key)
-        {
-            key = AddSysCustomKey(key);
-            return Do(redis => redis.SortedSetLength(key));
-        }
+        #endregion
 
-        #endregion 同步方法
-
-        #region 异步方法
+        #region  SortSet 不重复组合，包含权重，有序
 
         /// <summary>
-        /// 添加
+        /// 获取Redis SortSet 列表 
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="score"></param>
-        public async Task<bool> SortedSetAddAsync<T>(string key, T value, double score)
+        /// <typeparam name="T"></typeparam>
+        /// <param name="redisKey"></param>
+        /// <param name="skip">跳过多少</param>
+        /// <param name="take">查询多少项，-1 表示倒数第一项，-2表示倒数第二项，默认null 为全部 </param>
+        /// <param name="redisOrder">按权重排序方式</param>
+        public List<T> SortSetGet<T>(string redisKey, int skip = 0, int? take = null, Redis_Order redisOrder = Redis_Order.Descending)
         {
-            key = AddSysCustomKey(key);
-            return await Do(redis => redis.SortedSetAddAsync(key, ConvertJson<T>(value), score));
+            int stop = take.HasValue ? take.Value : -1;
+            Order order = redisOrder == Redis_Order.Descending ? Order.Descending : Order.Ascending;
+            return Do(redis =>
+                                    {
+                                        RedisValue[] redisValue = redis.SortedSetRangeByRank(redisKey, skip, stop, order);
+                                        return ConvertCollection<T>(redisValue);
+                                    });
         }
+
 
         /// <summary>
-        /// 删除
+        /// 设置Redis SortSet 列表
         /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        public async Task<bool> SortedSetRemoveAsync<T>(string key, T value)
+        /// <param name="scoreExpression">权重分</param>
+        public bool SortSetSet<T>(string redisKey, List<T> listData, Func<T, double> scoreExpression, TimeSpan? timespan)
         {
-            key = AddSysCustomKey(key);
-            return await Do(redis => redis.SortedSetRemoveAsync(key, ConvertJson(value)));
+            return Do(redis =>
+                                    {
+                                        var batch = redis.CreateBatch();
+                                        listData.ForEach((item) =>
+                                        {
+                                            string redisValue = ConvertJson<T>(item);
+                                            batch.SortedSetAddAsync(redisKey, redisValue, scoreExpression(item));
+                                        });
+                                        batch.Execute();
+                                        if (timespan.HasValue)
+                                        {
+                                            redis.KeyExpire(redisKey, timespan);
+                                        }
+
+                                        return true;
+                                    });
         }
 
-        /// <summary>
-        /// 获取全部
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public async Task<List<T>> SortedSetRangeByRankAsync<T>(string key)
-        {
-            key = AddSysCustomKey(key);
-            var values = await Do(redis => redis.SortedSetRangeByRankAsync(key));
-            return ConvetList<T>(values);
-        }
 
-        /// <summary>
-        /// 获取集合中的数量
-        /// </summary>
-        /// <param name="key"></param>
-        /// <returns></returns>
-        public async Task<long> SortedSetLengthAsync(string key)
-        {
-            key = AddSysCustomKey(key);
-            return await Do(redis => redis.SortedSetLengthAsync(key));
-        }
+        #endregion
 
-        #endregion 异步方法
-
-        #endregion SortedSet 有序集合
-
-        #region key
-
-        /// <summary>
-        /// 删除单个key
-        /// </summary>
-        /// <param name="key">redis key</param>
-        /// <returns>是否删除成功</returns>
-        public bool KeyDelete(string key)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.KeyDelete(key));
-        }
-
-        /// <summary>
-        /// 删除多个key
-        /// </summary>
-        /// <param name="keys">rediskey</param>
-        /// <returns>成功删除的个数</returns>
-        public long KeyDelete(List<string> keys)
-        {
-            List<string> newKeys = keys.Select(AddSysCustomKey).ToList();
-            return Do(db => db.KeyDelete(ConvertRedisKeys(newKeys)));
-        }
-
-        /// <summary>
-        /// 判断key是否存储
-        /// </summary>
-        /// <param name="key">redis key</param>
-        /// <returns></returns>
-        public bool KeyExists(string key)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.KeyExists(key));
-        }
-
-        /// <summary>
-        /// 重新命名key
-        /// </summary>
-        /// <param name="key">就的redis key</param>
-        /// <param name="newKey">新的redis key</param>
-        /// <returns></returns>
-        public bool KeyRename(string key, string newKey)
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.KeyRename(key, newKey));
-        }
-
-        /// <summary>
-        /// 设置Key的时间
-        /// </summary>
-        /// <param name="key">redis key</param>
-        /// <param name="expiry"></param>
-        /// <returns></returns>
-        public bool KeyExpire(string key, TimeSpan? expiry = default(TimeSpan?))
-        {
-            key = AddSysCustomKey(key);
-            return Do(db => db.KeyExpire(key, expiry));
-        }
-
-        #endregion key
 
         #region 发布订阅
 
+
         /// <summary>
-        /// Redis发布订阅  订阅
+        ///  Redis 订阅
         /// </summary>
-        /// <param name="subChannel"></param>
-        /// <param name="handler"></param>
-        public void Subscribe(string subChannel, Action<RedisChannel, RedisValue> handler = null)
+        public void Subscribe(string channelName, string redisKey, Action<RedisChannel, RedisValue> act = null)
         {
-            ISubscriber sub = _conn.GetSubscriber();
-            sub.Subscribe(subChannel, (channel, message) =>
+            ISubscriber sub = this._connectionMult.GetSubscriber();
+            sub.Subscribe(channelName, (channel, message) =>
             {
-                if (handler == null)
+                if (act != null)
                 {
-                    Console.WriteLine(subChannel + " 订阅收到消息：" + message);
-                }
-                else
-                {
-                    handler(channel, message);
+                    act(channel, message);
                 }
             });
         }
 
         /// <summary>
-        /// Redis发布订阅  发布
+        ///  Redis 取消订阅
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="channel"></param>
-        /// <param name="msg"></param>
-        /// <returns></returns>
-        public long Publish<T>(string channel, T msg)
+        public void Unsubscribe(string channelName, string redisKey, Action<RedisChannel, RedisValue> act = null)
         {
-            ISubscriber sub = _conn.GetSubscriber();
-            return sub.Publish(channel, ConvertJson(msg));
+            ISubscriber sub = this._connectionMult.GetSubscriber();
+            sub.Unsubscribe(channelName, (channel, message) =>
+            {
+                if (act != null)
+                {
+                    act(channel, message);
+                }
+            });
         }
 
         /// <summary>
-        /// Redis发布订阅  取消订阅
-        /// </summary>
-        /// <param name="channel"></param>
-        public void Unsubscribe(string channel)
-        {
-            ISubscriber sub = _conn.GetSubscriber();
-            sub.Unsubscribe(channel);
-        }
-
-        /// <summary>
-        /// Redis发布订阅  取消全部订阅
+        ///  Redis 取消所有订阅
         /// </summary>
         public void UnsubscribeAll()
         {
-            ISubscriber sub = _conn.GetSubscriber();
+            ISubscriber sub = this._connectionMult.GetSubscriber();
             sub.UnsubscribeAll();
         }
 
-        #endregion 发布订阅
-
-        #region 其他
-
-        public ITransaction CreateTransaction()
-        {
-            return GetDatabase().CreateTransaction();
-        }
-
-        public IDatabase GetDatabase()
-        {
-            return _conn.GetDatabase(DbNum.GetHashCode());
-        }
-
-        public IServer GetServer(string hostAndPort)
-        {
-            return _conn.GetServer(hostAndPort);
-        }
 
         /// <summary>
-        /// 设置前缀
+        ///  Redis 发布
         /// </summary>
-        /// <param name="customKey"></param>
-        public void SetSysCustomKey(string customKey)
+        public void Publish<T>(string channelName, T data)
         {
-            CustomKey = customKey;
+            ISubscriber sub = this._connectionMult.GetSubscriber();
+            string json = ConvertJson<T>(data);
+            sub.Publish(channelName, json);
         }
 
-        #endregion 其他
+        #endregion
 
-        #region 辅助方法
-
-        private string AddSysCustomKey(string oldKey)
-        {
-            var prefixKey = CustomKey ?? RedisConnectionHelp.SysCustomKey;
-            return prefixKey + oldKey;
-        }
 
         private T Do<T>(Func<IDatabase, T> func)
         {
-            var database = _conn.GetDatabase(DbNum.GetHashCode());
+            var database = _connectionMult.GetDatabase(0);
             return func(database);
         }
 
-        private string ConvertJson<T>(T value)
+
+        private static string GetValue<T>(T model, string propertyName)
+        {
+            var pi = typeof(T).GetProperty(propertyName);
+            object obj = pi.GetValue(model, null);
+            return obj == null ? "" : obj.ToString();
+
+        }
+
+        private static string ConvertJson<T>(T value)
         {
             string result = value is string ? value.ToString() : JsonConvert.SerializeObject(value);
             return result;
         }
 
-        private T ConvertObj<T>(RedisValue value)
+        private static T ConvertObj<T>(RedisValue value)
         {
+            if (value.IsNull)
+            {
+                return default(T);
+            }
+
             if (typeof(T).Name.Equals(typeof(string).Name))
             {
                 return JsonConvert.DeserializeObject<T>("'{value}'");
@@ -944,23 +487,18 @@ namespace Custom.Basic.Framework.Package.Redis
             return JsonConvert.DeserializeObject<T>(value);
         }
 
-        private List<T> ConvetList<T>(RedisValue[] values)
+        private static List<T> ConvertCollection<T>(RedisValue[] redisValues)
         {
             List<T> result = new List<T>();
-            foreach (var item in values)
+            foreach (var v in redisValues)
             {
-                var model = ConvertObj<T>(item);
+                T model = ConvertObj<T>(v);
                 result.Add(model);
             }
+
             return result;
         }
 
-        private RedisKey[] ConvertRedisKeys(List<string> redisKeys)
-        {
-            return redisKeys.Select(redisKey => (RedisKey)redisKey).ToArray();
-        }
 
-        #endregion 辅助方法
     }
 }
-
