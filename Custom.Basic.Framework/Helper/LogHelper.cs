@@ -1,130 +1,79 @@
-﻿using System;
+﻿using log4net;
+using log4net.Appender;
+using log4net.Config;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Custom.Basic.Framework.Helper
 {
     /// <summary>
-    /// FileHelper
+    /// logHelper
     /// </summary>
-    public static class LogHelper
+    public abstract class LogHelper : LogBaseHelper
     {
-        /// <summary>
-        ///  写日志
-        /// </summary>
-        /// <param name="typeName">类型名称</param>
-        /// <param name="msg">内容</param>
-        /// <param name="ex">异常</param>
-        /// <param name="fileName">文件名，默认自动生成</param>
-        private static void WriteLog(string typeName, string msg, Exception ex, string fileName = null)
+        private static readonly ILog log;
+
+        static LogHelper()
         {
-
-            string filefullName = fileName.IsNullOrWhiteSpace() ?
-                 Path.Combine(AppDomain.CurrentDomain.BaseDirectory, string.Format(@"Log\{0}\{1}\{2}.{3}", DateTime.Now.ToString("yyyy-MM"), typeName, DateTime.Now.ToString("yyyy-MM-dd"), "txt"))
-                 : fileName;
-
-            string folderName = Path.GetDirectoryName(filefullName);
-            if (!Directory.Exists(folderName))
-            {
-                Directory.CreateDirectory(folderName);
-            }
-
-            if (ex != null)
-            {
-                msg += ex.Message + ", Exception=>" + ex.StackTrace;
-
-                if (ex.InnerException != null)
-                {
-                    msg += ex.InnerException.Message + ", InnerException=>" + ex.InnerException.StackTrace;
-                }
-            }
-
-
-            try
-            {
-                using (FileStream fs = new FileStream(filefullName, FileMode.Append, FileAccess.Write))
-                {
-                    using (StreamWriter sw = new StreamWriter(fs, Encoding.UTF8))
-                    {
-                        sw.WriteLine(string.Format("[{0} {1}]: {2}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), typeName, msg));
-                        sw.WriteLine("---------------------------------------------------------");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-
+            log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }
 
 
         /// <summary>
-        ///  写日志
+        /// 错误日志
         /// </summary>
-        /// <param name="msg">内容</param>
-        /// <param name="ex">异常</param>
-        /// <param name="fileName">文件名，默认自动生成</param>
-        private static void InfoLog(string msg, Exception ex, string fileName = null)
+        /// <param name="msg"></param>
+        /// <param name="ex"></param>
+        public static void Error(string msg, Exception ex = null)
         {
-            WriteLog("INFO", msg, ex, fileName);
+            log.Error(msg, ex);
         }
 
         /// <summary>
-        ///  写日志
+        /// 正常日志
         /// </summary>
-        /// <param name="msg">内容</param>
-        /// <param name="fileName">文件名，默认自动生成</param>
-        public static void InfoLog(string msg, string fileName = null)
+        /// <param name="msg"></param>
+        /// <param name="ex"></param>
+        public static void Info(string msg, Exception ex = null)
         {
-            InfoLog(msg, null, fileName);
-
-        }
-
-
-        /// <summary>
-        ///  错误异常
-        /// </summary>
-        public static void ErrorLog(string msg, Exception ex, string fileName = null)
-        {
-            WriteLog("ERROR", msg, ex, fileName);
+            log.Info(msg, ex);
         }
 
         /// <summary>
-        ///  错误异常
+        /// 警告日志
         /// </summary>
-        public static void ErrorLog(string msg, string fileName = null)
+        /// <param name="msg"></param>
+        /// <param name="ex"></param>
+        public static void Warning(string msg, Exception ex = null)
         {
-            WriteLog("ERROR", msg, null, fileName);
+            log.Warn(msg, ex);
         }
-
 
         /// <summary>
-        ///  读取文件内容
+        /// Debug 日志
         /// </summary>
-        /// <param name="fileName"></param>
-        /// <returns></returns>
-        public static string ReadContent(string fileName)
+        /// <param name="msg"></param>
+        /// <param name="ex"></param>
+        public static void Debug(string msg, Exception ex = null)
         {
-            try
-            {
-                using (FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read))
-                {
-                    using (StreamReader sr = new StreamReader(fs, Encoding.UTF8))
-                    {
-                        return sr.ReadToEnd();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            log.Debug(msg, ex);
         }
+
+    }
+
+
+    /// <summary>
+    /// log4net 基类
+    /// </summary>
+    public abstract class LogBaseHelper : FileAppender.MinimalLock
+    {
+
 
 
     }
+
 }

@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StackExchange.Redis, Version=1.2.6.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\StackExchange.Redis.1.2.6\lib\net45\StackExchange.Redis.dll</HintPath>
       <Private>True</Private>
@@ -70,6 +74,7 @@
     <Compile Include="HelperTest\LogHelperTest.cs" />
     <Compile Include="HelperTest\RegexHelperTest.cs" />
     <Compile Include="HelperTest\StringHelperTest.cs" />
+    <Compile Include="HelperTest\TimeHelperTest.cs" />
     <Compile Include="HelperTest\XmlHelprtTest.cs" />
     <Compile Include="ModelTest\TestModel.cs" />
     <Compile Include="PackageTest\ExcelEpplusManagerTest.cs" />
@@ -87,6 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Config\log4net.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

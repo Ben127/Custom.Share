@@ -22,17 +22,13 @@ namespace Custom.Basic.Framework.Test.HelperTest
             string fileName = "test.log";
             string msg = "Hello world";
 
-            LogHelper.ErrorLog(msg);
-            LogHelper.InfoLog("程序测试....");
+            LogHelper.Error(msg);
+            LogHelper.Info("程序测试....");
 
             // check file exists
             string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
 
             Assert.True(File.Exists(path));
-
-            // check file content
-            string source = LogHelper.ReadContent(path);
-            Assert.Equal(source, "Hello world\r\n");
 
         }
 
