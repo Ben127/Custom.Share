@@ -42,6 +42,10 @@
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MediaToolkit, Version=1.1.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MediaToolkit.1.1.0.1\lib\net40\MediaToolkit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -62,6 +66,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -132,9 +137,11 @@
     <Compile Include="Helper\DictionaryHelper.cs" />
     <Compile Include="Helper\JsonHelper.cs" />
     <Compile Include="Helper\LogHelper.cs" />
+    <Compile Include="Helper\MediaHelper.cs" />
     <Compile Include="Helper\RegexHelper.cs" />
     <Compile Include="Helper\StringHelper.cs" />
     <Compile Include="Helper\TimeHelper.cs" />
+    <Compile Include="Helper\WinformHelper.cs" />
     <Compile Include="Helper\XmlHelper.cs" />
     <Compile Include="Json\PropertySerializeContractResolver.cs" />
     <Compile Include="Package\Excel\ExcelEpplusManager.cs" />

@@ -72,6 +72,14 @@ namespace Custom.Basic.Framework.Helper
     public abstract class LogBaseHelper : FileAppender.MinimalLock
     {
 
+        public override Stream AcquireLock()
+        {
+            if (CurrentAppender.Threshold == log4net.Core.Level.Off)
+                return null;
+
+            return base.AcquireLock();
+        }
+
 
 
     }

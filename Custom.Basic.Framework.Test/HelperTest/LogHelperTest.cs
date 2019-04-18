@@ -22,7 +22,7 @@ namespace Custom.Basic.Framework.Test.HelperTest
             string fileName = "test.log";
             string msg = "Hello world";
 
-            LogHelper.Error(msg);
+            LogHelper.Error(msg); 
             LogHelper.Info("程序测试....");
 
             // check file exists
