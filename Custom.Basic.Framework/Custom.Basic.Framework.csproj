@@ -67,6 +67,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -145,13 +147,14 @@
     <Compile Include="Helper\TimeHelper.cs" />
     <Compile Include="Helper\WinformHelper.cs" />
     <Compile Include="Helper\XmlHelper.cs" />
+    <Compile Include="Helper\XpathHelper.cs" />
     <Compile Include="Json\PropertySerializeContractResolver.cs" />
     <Compile Include="Package\Excel\ExcelEpplusManager.cs" />
+    <Compile Include="Package\Html\HtmlManger.cs" />
     <Compile Include="Package\Policy\PolicyManager.cs" />
     <Compile Include="Package\Redis\RedisConfig.cs" />
     <Compile Include="Package\Redis\RedisEnum.cs" />
     <Compile Include="Package\Redis\RedisManager.cs" />
-    <Compile Include="Package\Web\HtmlAgPackXpathManager.cs" />
     <Compile Include="Package\Web\RestSharpManager.cs" />
     <Compile Include="Pinvoke\Enum\AnimateWindowFlags.cs" />
     <Compile Include="Pinvoke\Enum\InternetGetConnectedStateFlags.cs" />

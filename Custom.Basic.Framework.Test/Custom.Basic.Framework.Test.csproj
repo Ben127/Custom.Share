@@ -76,6 +76,7 @@
     <Compile Include="HelperTest\StringHelperTest.cs" />
     <Compile Include="HelperTest\TimeHelperTest.cs" />
     <Compile Include="HelperTest\XmlHelprtTest.cs" />
+    <Compile Include="HelperTest\XpathTest.cs" />
     <Compile Include="ModelTest\TestModel.cs" />
     <Compile Include="PackageTest\ExcelEpplusManagerTest.cs" />
     <Compile Include="PackageTest\PolicyManagerTest.cs" />
