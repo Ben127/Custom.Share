@@ -73,6 +73,7 @@
     <Compile Include="HelperTest\JsonHelperTest.cs" />
     <Compile Include="HelperTest\LogHelperTest.cs" />
     <Compile Include="HelperTest\RegexHelperTest.cs" />
+    <Compile Include="HelperTest\SecurityHelperTest.cs" />
     <Compile Include="HelperTest\StringHelperTest.cs" />
     <Compile Include="HelperTest\TimeHelperTest.cs" />
     <Compile Include="HelperTest\XmlHelprtTest.cs" />
