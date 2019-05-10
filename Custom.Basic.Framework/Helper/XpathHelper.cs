@@ -19,25 +19,19 @@ namespace Custom.Basic.Framework.Helper
         /// <param name="url"></param>
         /// <param name="xpath"></param>
         /// <returns></returns>
-        public static HtmlNodeCollection GetWebNodes(string url, string xpath, Encoding encoding = null)
+        public static HtmlNodeCollection GetWebNodes(string url, string xpath, string encoding = null)
         {
             var web = new HtmlWeb();
-            if (encoding == null)
-            {
-                web.OverrideEncoding = Encoding.GetEncoding("GB2312");
-            }
+            web.OverrideEncoding = Encoding.GetEncoding(encoding ?? "utf-8");
             var doc = web.Load(url);
 
             return doc.DocumentNode.SelectNodes(xpath);
         }
 
-        public static string GetWebString(string url, string xpath = null, Encoding encoding = null)
+        public static string GetWebString(string url, string xpath = null, string encoding = null)
         {
             var web = new HtmlWeb();
-            if (encoding == null)
-            {
-                web.OverrideEncoding = Encoding.GetEncoding("GB2312");
-            }
+            web.OverrideEncoding = Encoding.GetEncoding(encoding ?? "utf-8");
             var doc = web.Load(url);
 
             if (!string.IsNullOrEmpty(xpath))
