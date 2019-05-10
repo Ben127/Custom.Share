@@ -12,31 +12,35 @@ namespace Custom.Basic.Framework.Helper
     /// </summary>
     public class SecurityHelper
     {
-        private const string Key = "KEY_12321";
+        private static DESCryptoServiceProvider crypt = new DESCryptoServiceProvider();
+        private const string Key = "123";
 
-        public static string RSAEncryption(string express)
+        public static string DESEncryption(string express)
         {
-            CspParameters param = new CspParameters();
-            param.KeyContainerName = Key;//密匙容器的名称，保持加密解密一致才能解密成功
-            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(param))
-            {
-                byte[] plaindata = Encoding.Default.GetBytes(express);//将要加密的字符串转换为字节数组
-                byte[] encryptdata = rsa.Encrypt(plaindata, false);//将加密后的字节数据转换为新的加密字节数组
-                return Convert.ToBase64String(encryptdata);//将加密后的字节数组转换为字符串
-            }
+            crypt.Key = Encoding.UTF8.GetBytes(Key);
+            crypt.Mode = CipherMode.CBC;
+            crypt.Padding = PaddingMode.PKCS7;
+
+            //用UTF-8编码，转为byte[]
+            byte[] bysData = Encoding.UTF8.GetBytes(express);
+            //进行加密
+            byte[] bysEncrypted = crypt.CreateEncryptor().TransformFinalBlock(bysData, 0, bysData.Length);
+            //將byte[]轉為Base64的字串
+            return Convert.ToBase64String(bysEncrypted);
         }
 
         //解密
-        public static string RSADecrypt(string ciphertext)
+        public static string DESDecrypt(string ciphertext)
         {
-            CspParameters param = new CspParameters();
-            param.KeyContainerName = Key;
-            using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider(param))
-            {
-                byte[] encryptdata = Convert.FromBase64String(ciphertext);
-                byte[] decryptdata = rsa.Decrypt(encryptdata, false);
-                return Encoding.Default.GetString(decryptdata);
-            }
+            crypt.Key = Encoding.UTF8.GetBytes(Key);
+            crypt.Mode = CipherMode.CBC;
+            crypt.Padding = PaddingMode.PKCS7;
+
+            byte[] bysData = Convert.FromBase64String(ciphertext);
+
+            //进行解密
+            byte[] bysDecrypted = crypt.CreateDecryptor().TransformFinalBlock(bysData, 0, bysData.Length);
+            return Encoding.UTF8.GetString(bysDecrypted);
         }
 
     }

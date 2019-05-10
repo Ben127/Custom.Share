@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>地图demo</title>
+     <link href="static/css/main.css" rel="stylesheet" />
+    <script src="static/js/echarts.min.js"></script>
+    <script src="static/js/china.js"></script>
+    <script src="static/js/jquery.min.js"></script>
+</head>
+<body>
+
+    <div id="main" style="width: 100%; height: 100%;"></div>
+
+
+        <script>
+            init();
+
+            function init() {
+                var chart = echarts.init(document.getElementById('main'));
+
+                var option = {
+                    backgroundColor: '#ffffff',
+                    title: {
+                        text: '中国省市地图',
+                        subtext: 'China',
+                        left: 'center',
+                        top: '20%',
+                        textStyle: {
+                            color: '#000000',
+                            fontSize: 16,
+                            fontWeight: 'normal',
+                            fontFamily: "Microsoft YaHei"
+                        },
+                        subtextStyle: {
+                            color: '#000000',
+                            fontSize: 13,
+                            fontWeight: 'normal',
+                            fontFamily: "Microsoft YaHei"
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item',
+                        //formatter: function (params,ticket,callback) {
+                        //    $.get('detail?name=' + params.name, function (content) {
+                        //        callback(ticket, toHTML(content));
+                        //    });
+                        //    return 'loading ... ';
+                        //}
+
+                        //formatter: "{a} <br/>{b} : {c} ({d}%)"
+                        formatter: '{b}'
+                    },
+                    animationDuration: 1000,
+                    animationEasing: 'cubicOut',
+                    animationDurationUpdate: 1000,
+                    series: {
+                        type: 'map',
+                        map: 'china',
+                        mapType: "china",
+                        selectedMode: 'multiple',
+                        label: {
+                            normal: {
+                                show: true,
+                                textStyle: {
+                                    color: '#999',
+                                    fontSize: 13
+                                }
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    color: '#fff',
+                                    fontSize: 13
+                                }
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                areaColor: '#323c48',
+                                borderColor: 'dodgerblue'
+                            },
+                            emphasis: {
+                                areaColor: 'darkorange'
+                            }
+                        },
+                        data: [
+                                     { name: "台湾" }
+                                    , { name: "河北", selected: true }
+                                    , { name: "山西" }
+                                    , { name: "内蒙古" }
+                                    , { name: "辽宁", selected: true }
+                                    , { name: "吉林" }
+                                    , { name: "黑龙江", value: 12 }
+                                    , { name: "江苏" }
+                                    , { name: "浙江" }
+                                    , { name: "安徽" }
+                                    , { name: "福建" }
+                                    , { name: "江西", selected: true }
+                                    , { name: "山东" }
+                                    , { name: "河南" }
+                                    , { name: "湖北" }
+                                    , { name: "湖南" }
+                                    , { name: "广东", value: 11 }
+                                    , { name: "广西" }
+                                    , { name: "海南" }
+                                    , { name: "四川" }
+                                    , { name: "贵州" }
+                                    , { name: "云南" }
+                                    , { name: "西藏", selected: true }
+                                    , { name: "陕西" }
+                                    , { name: "甘肃" }
+                                    , { name: "青海" }
+                                    , { name: "宁夏" }
+                                    , { name: "新疆" }
+                                    , { name: "北京" }
+                                    , { name: "天津" }
+                                    , { name: "上海", selected: true }
+                                    , { name: "重庆" }
+                                    , { name: "香港" }
+                                    , { name: "澳门" }
+                        ]
+                    }
+                };
+                // 设置参数
+                chart.setOption(option);
+            }
+
+
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{496999A3-6E12-4F39-8D8F-857305C59BFC}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Custom.Webform.Examples</RootNamespace>
+    <AssemblyName>Custom.Webform.Examples</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="area.html" />
+    <Content Include="static\css\main.css" />
+    <Content Include="static\js\app.js" />
+    <Content Include="static\js\china.js" />
+    <Content Include="static\js\citymap.js" />
+    <Content Include="static\js\echarts.min.js" />
+    <Content Include="static\js\jquery.min.js" />
+    <Content Include="static\map\city\china-main-city-map.js" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="static\map\china.json" />
+    <Content Include="static\map\city\110100.json" />
+    <Content Include="static\map\city\120100.json" />
+    <Content Include="static\map\city\130100.json" />
+    <Content Include="static\map\city\130200.json" />
+    <Content Include="static\map\city\130300.json" />
+    <Content Include="static\map\city\130400.json" />
+    <Content Include="static\map\city\130500.json" />
+    <Content Include="static\map\city\130600.json" />
+    <Content Include="static\map\city\130700.json" />
+    <Content Include="static\map\city\130800.json" />
+    <Content Include="static\map\city\130900.json" />
+    <Content Include="static\map\city\131000.json" />
+    <Content Include="static\map\city\131100.json" />
+    <Content Include="static\map\city\140100.json" />
+    <Content Include="static\map\city\140200.json" />
+    <Content Include="static\map\city\140300.json" />
+    <Content Include="static\map\city\140400.json" />
+    <Content Include="static\map\city\140500.json" />
+    <Content Include="static\map\city\140600.json" />
+    <Content Include="static\map\city\140700.json" />
+    <Content Include="static\map\city\140800.json" />
+    <Content Include="static\map\city\140900.json" />
+    <Content Include="static\map\city\141000.json" />
+    <Content Include="static\map\city\141100.json" />
+    <Content Include="static\map\city\150100.json" />
+    <Content Include="static\map\city\150200.json" />
+    <Content Include="static\map\city\150300.json" />
+    <Content Include="static\map\city\150400.json" />
+    <Content Include="static\map\city\150500.json" />
+    <Content Include="static\map\city\150600.json" />
+    <Content Include="static\map\city\150700.json" />
+    <Content Include="static\map\city\150800.json" />
+    <Content Include="static\map\city\150900.json" />
+    <Content Include="static\map\city\152200.json" />
+    <Content Include="static\map\city\152500.json" />
+    <Content Include="static\map\city\152900.json" />
+    <Content Include="static\map\city\210100.json" />
+    <Content Include="static\map\city\210200.json" />
+    <Content Include="static\map\city\210300.json" />
+    <Content Include="static\map\city\210400.json" />
+    <Content Include="static\map\city\210500.json" />
+    <Content Include="static\map\city\210600.json" />
+    <Content Include="static\map\city\210700.json" />
+    <Content Include="static\map\city\210800.json" />
+    <Content Include="static\map\city\210900.json" />
+    <Content Include="static\map\city\211000.json" />
+    <Content Include="static\map\city\211100.json" />
+    <Content Include="static\map\city\211200.json" />
+    <Content Include="static\map\city\211300.json" />
+    <Content Include="static\map\city\211400.json" />
+    <Content Include="static\map\city\220100.json" />
+    <Content Include="static\map\city\220200.json" />
+    <Content Include="static\map\city\220300.json" />
+    <Content Include="static\map\city\220400.json" />
+    <Content Include="static\map\city\220500.json" />
+    <Content Include="static\map\city\220600.json" />
+    <Content Include="static\map\city\220700.json" />
+    <Content Include="static\map\city\220800.json" />
+    <Content Include="static\map\city\222400.json" />
+    <Content Include="static\map\city\230100.json" />
+    <Content Include="static\map\city\230200.json" />
+    <Content Include="static\map\city\230300.json" />
+    <Content Include="static\map\city\230400.json" />
+    <Content Include="static\map\city\230500.json" />
+    <Content Include="static\map\city\230600.json" />
+    <Content Include="static\map\city\230700.json" />
+    <Content Include="static\map\city\230800.json" />
+    <Content Include="static\map\city\230900.json" />
+    <Content Include="static\map\city\231000.json" />
+    <Content Include="static\map\city\231100.json" />
+    <Content Include="static\map\city\231200.json" />
+    <Content Include="static\map\city\232700.json" />
+    <Content Include="static\map\city\310100.json" />
+    <Content Include="static\map\city\310200.json" />
+    <Content Include="static\map\city\320100.json" />
+    <Content Include="static\map\city\320200.json" />
+    <Content Include="static\map\city\320300.json" />
+    <Content Include="static\map\city\320400.json" />
+    <Content Include="static\map\city\320500.json" />
+    <Content Include="static\map\city\320600.json" />
+    <Content Include="static\map\city\320700.json" />
+    <Content Include="static\map\city\320800.json" />
+    <Content Include="static\map\city\320900.json" />
+    <Content Include="static\map\city\321000.json" />
+    <Content Include="static\map\city\321100.json" />
+    <Content Include="static\map\city\321200.json" />
+    <Content Include="static\map\city\321300.json" />
+    <Content Include="static\map\city\330100.json" />
+    <Content Include="static\map\city\330200.json" />
+    <Content Include="static\map\city\330300.json" />
+    <Content Include="static\map\city\330400.json" />
+    <Content Include="static\map\city\330500.json" />
+    <Content Include="static\map\city\330600.json" />
+    <Content Include="static\map\city\330700.json" />
+    <Content Include="static\map\city\330800.json" />
+    <Content Include="static\map\city\330900.json" />
+    <Content Include="static\map\city\331000.json" />
+    <Content Include="static\map\city\331100.json" />
+    <Content Include="static\map\city\340100.json" />
+    <Content Include="static\map\city\340200.json" />
+    <Content Include="static\map\city\340300.json" />
+    <Content Include="static\map\city\340400.json" />
+    <Content Include="static\map\city\340500.json" />
+    <Content Include="static\map\city\340600.json" />
+    <Content Include="static\map\city\340700.json" />
+    <Content Include="static\map\city\340800.json" />
+    <Content Include="static\map\city\341000.json" />
+    <Content Include="static\map\city\341100.json" />
+    <Content Include="static\map\city\341200.json" />
+    <Content Include="static\map\city\341300.json" />
+    <Content Include="static\map\city\341500.json" />
+    <Content Include="static\map\city\341600.json" />
+    <Content Include="static\map\city\341700.json" />
+    <Content Include="static\map\city\341800.json" />
+    <Content Include="static\map\city\350100.json" />
+    <Content Include="static\map\city\350200.json" />
+    <Content Include="static\map\city\350300.json" />
+    <Content Include="static\map\city\350400.json" />
+    <Content Include="static\map\city\350500.json" />
+    <Content Include="static\map\city\350600.json" />
+    <Content Include="static\map\city\350700.json" />
+    <Content Include="static\map\city\350800.json" />
+    <Content Include="static\map\city\350900.json" />
+    <Content Include="static\map\city\360100.json" />
+    <Content Include="static\map\city\360200.json" />
+    <Content Include="static\map\city\360300.json" />
+    <Content Include="static\map\city\360400.json" />
+    <Content Include="static\map\city\360500.json" />
+    <Content Include="static\map\city\360600.json" />
+    <Content Include="static\map\city\360700.json" />
+    <Content Include="static\map\city\360800.json" />
+    <Content Include="static\map\city\360900.json" />
+    <Content Include="static\map\city\361000.json" />
+    <Content Include="static\map\city\361100.json" />
+    <Content Include="static\map\city\370100.json" />
+    <Content Include="static\map\city\370200.json" />
+    <Content Include="static\map\city\370300.json" />
+    <Content Include="static\map\city\370400.json" />
+    <Content Include="static\map\city\370500.json" />
+    <Content Include="static\map\city\370600.json" />
+    <Content Include="static\map\city\370700.json" />
+    <Content Include="static\map\city\370800.json" />
+    <Content Include="static\map\city\370900.json" />
+    <Content Include="static\map\city\371000.json" />
+    <Content Include="static\map\city\371100.json" />
+    <Content Include="static\map\city\371200.json" />
+    <Content Include="static\map\city\371300.json" />
+    <Content Include="static\map\city\371400.json" />
+    <Content Include="static\map\city\371500.json" />
+    <Content Include="static\map\city\371600.json" />
+    <Content Include="static\map\city\371700.json" />
+    <Content Include="static\map\city\410100.json" />
+    <Content Include="static\map\city\410200.json" />
+    <Content Include="static\map\city\410300.json" />
+    <Content Include="static\map\city\410400.json" />
+    <Content Include="static\map\city\410500.json" />
+    <Content Include="static\map\city\410600.json" />
+    <Content Include="static\map\city\410700.json" />
+    <Content Include="static\map\city\410800.json" />
+    <Content Include="static\map\city\410900.json" />
+    <Content Include="static\map\city\411000.json" />
+    <Content Include="static\map\city\411100.json" />
+    <Content Include="static\map\city\411200.json" />
+    <Content Include="static\map\city\411300.json" />
+    <Content Include="static\map\city\411400.json" />
+    <Content Include="static\map\city\411500.json" />
+    <Content Include="static\map\city\411600.json" />
+    <Content Include="static\map\city\411700.json" />
+    <Content Include="static\map\city\420100.json" />
+    <Content Include="static\map\city\420200.json" />
+    <Content Include="static\map\city\420300.json" />
+    <Content Include="static\map\city\420500.json" />
+    <Content Include="static\map\city\420600.json" />
+    <Content Include="static\map\city\420700.json" />
+    <Content Include="static\map\city\420800.json" />
+    <Content Include="static\map\city\420900.json" />
+    <Content Include="static\map\city\421000.json" />
+    <Content Include="static\map\city\421100.json" />
+    <Content Include="static\map\city\421200.json" />
+    <Content Include="static\map\city\421300.json" />
+    <Content Include="static\map\city\422800.json" />
+    <Content Include="static\map\city\429000.json" />
+    <Content Include="static\map\city\430100.json" />
+    <Content Include="static\map\city\430200.json" />
+    <Content Include="static\map\city\430300.json" />
+    <Content Include="static\map\city\430400.json" />
+    <Content Include="static\map\city\430500.json" />
+    <Content Include="static\map\city\430600.json" />
+    <Content Include="static\map\city\430700.json" />
+    <Content Include="static\map\city\430800.json" />
+    <Content Include="static\map\city\430900.json" />
+    <Content Include="static\map\city\431000.json" />
+    <Content Include="static\map\city\431100.json" />
+    <Content Include="static\map\city\431200.json" />
+    <Content Include="static\map\city\431300.json" />
+    <Content Include="static\map\city\433100.json" />
+    <Content Include="static\map\city\440100.json" />
+    <Content Include="static\map\city\440200.json" />
+    <Content Include="static\map\city\440300.json" />
+    <Content Include="static\map\city\440400.json" />
+    <Content Include="static\map\city\440500.json" />
+    <Content Include="static\map\city\440600.json" />
+    <Content Include="static\map\city\440700.json" />
+    <Content Include="static\map\city\440800.json" />
+    <Content Include="static\map\city\440900.json" />
+    <Content Include="static\map\city\441200.json" />
+    <Content Include="static\map\city\441300.json" />
+    <Content Include="static\map\city\441400.json" />
+    <Content Include="static\map\city\441500.json" />
+    <Content Include="static\map\city\441600.json" />
+    <Content Include="static\map\city\441700.json" />
+    <Content Include="static\map\city\441800.json" />
+    <Content Include="static\map\city\441900.json" />
+    <Content Include="static\map\city\442000.json" />
+    <Content Include="static\map\city\445100.json" />
+    <Content Include="static\map\city\445200.json" />
+    <Content Include="static\map\city\445300.json" />
+    <Content Include="static\map\city\450100.json" />
+    <Content Include="static\map\city\450200.json" />
+    <Content Include="static\map\city\450300.json" />
+    <Content Include="static\map\city\450400.json" />
+    <Content Include="static\map\city\450500.json" />
+    <Content Include="static\map\city\450600.json" />
+    <Content Include="static\map\city\450700.json" />
+    <Content Include="static\map\city\450800.json" />
+    <Content Include="static\map\city\450900.json" />
+    <Content Include="static\map\city\451000.json" />
+    <Content Include="static\map\city\451100.json" />
+    <Content Include="static\map\city\451200.json" />
+    <Content Include="static\map\city\451300.json" />
+    <Content Include="static\map\city\451400.json" />
+    <Content Include="static\map\city\460100.json" />
+    <Content Include="static\map\city\460200.json" />
+    <Content Include="static\map\city\460300.json" />
+    <Content Include="static\map\city\469000.json" />
+    <Content Include="static\map\city\500100.json" />
+    <Content Include="static\map\city\510100.json" />
+    <Content Include="static\map\city\510300.json" />
+    <Content Include="static\map\city\510400.json" />
+    <Content Include="static\map\city\510500.json" />
+    <Content Include="static\map\city\510600.json" />
+    <Content Include="static\map\city\510700.json" />
+    <Content Include="static\map\city\510800.json" />
+    <Content Include="static\map\city\510900.json" />
+    <Content Include="static\map\city\511000.json" />
+    <Content Include="static\map\city\511100.json" />
+    <Content Include="static\map\city\511300.json" />
+    <Content Include="static\map\city\511400.json" />
+    <Content Include="static\map\city\511500.json" />
+    <Content Include="static\map\city\511600.json" />
+    <Content Include="static\map\city\511700.json" />
+    <Content Include="static\map\city\511800.json" />
+    <Content Include="static\map\city\511900.json" />
+    <Content Include="static\map\city\512000.json" />
+    <Content Include="static\map\city\513200.json" />
+    <Content Include="static\map\city\513300.json" />
+    <Content Include="static\map\city\513400.json" />
+    <Content Include="static\map\city\520100.json" />
+    <Content Include="static\map\city\520200.json" />
+    <Content Include="static\map\city\520300.json" />
+    <Content Include="static\map\city\520400.json" />
+    <Content Include="static\map\city\522200.json" />
+    <Content Include="static\map\city\522300.json" />
+    <Content Include="static\map\city\522400.json" />
+    <Content Include="static\map\city\522600.json" />
+    <Content Include="static\map\city\522700.json" />
+    <Content Include="static\map\city\530100.json" />
+    <Content Include="static\map\city\530300.json" />
+    <Content Include="static\map\city\530400.json" />
+    <Content Include="static\map\city\530500.json" />
+    <Content Include="static\map\city\530600.json" />
+    <Content Include="static\map\city\530700.json" />
+    <Content Include="static\map\city\530800.json" />
+    <Content Include="static\map\city\530900.json" />
+    <Content Include="static\map\city\532300.json" />
+    <Content Include="static\map\city\532500.json" />
+    <Content Include="static\map\city\532600.json" />
+    <Content Include="static\map\city\532800.json" />
+    <Content Include="static\map\city\532900.json" />
+    <Content Include="static\map\city\533100.json" />
+    <Content Include="static\map\city\533300.json" />
+    <Content Include="static\map\city\533400.json" />
+    <Content Include="static\map\city\540100.json" />
+    <Content Include="static\map\city\542100.json" />
+    <Content Include="static\map\city\542200.json" />
+    <Content Include="static\map\city\542300.json" />
+    <Content Include="static\map\city\542400.json" />
+    <Content Include="static\map\city\542500.json" />
+    <Content Include="static\map\city\542600.json" />
+    <Content Include="static\map\city\610100.json" />
+    <Content Include="static\map\city\610200.json" />
+    <Content Include="static\map\city\610300.json" />
+    <Content Include="static\map\city\610400.json" />
+    <Content Include="static\map\city\610500.json" />
+    <Content Include="static\map\city\610600.json" />
+    <Content Include="static\map\city\610700.json" />
+    <Content Include="static\map\city\610800.json" />
+    <Content Include="static\map\city\610900.json" />
+    <Content Include="static\map\city\611000.json" />
+    <Content Include="static\map\city\620100.json" />
+    <Content Include="static\map\city\620200.json" />
+    <Content Include="static\map\city\620300.json" />
+    <Content Include="static\map\city\620400.json" />
+    <Content Include="static\map\city\620500.json" />
+    <Content Include="static\map\city\620600.json" />
+    <Content Include="static\map\city\620700.json" />
+    <Content Include="static\map\city\620800.json" />
+    <Content Include="static\map\city\620900.json" />
+    <Content Include="static\map\city\621000.json" />
+    <Content Include="static\map\city\621100.json" />
+    <Content Include="static\map\city\621200.json" />
+    <Content Include="static\map\city\622900.json" />
+    <Content Include="static\map\city\623000.json" />
+    <Content Include="static\map\city\630100.json" />
+    <Content Include="static\map\city\632100.json" />
+    <Content Include="static\map\city\632200.json" />
+    <Content Include="static\map\city\632300.json" />
+    <Content Include="static\map\city\632500.json" />
+    <Content Include="static\map\city\632600.json" />
+    <Content Include="static\map\city\632700.json" />
+    <Content Include="static\map\city\632800.json" />
+    <Content Include="static\map\city\640100.json" />
+    <Content Include="static\map\city\640200.json" />
+    <Content Include="static\map\city\640300.json" />
+    <Content Include="static\map\city\640400.json" />
+    <Content Include="static\map\city\640500.json" />
+    <Content Include="static\map\city\650100.json" />
+    <Content Include="static\map\city\650200.json" />
+    <Content Include="static\map\city\652100.json" />
+    <Content Include="static\map\city\652200.json" />
+    <Content Include="static\map\city\652300.json" />
+    <Content Include="static\map\city\652700.json" />
+    <Content Include="static\map\city\652800.json" />
+    <Content Include="static\map\city\652900.json" />
+    <Content Include="static\map\city\653000.json" />
+    <Content Include="static\map\city\653100.json" />
+    <Content Include="static\map\city\653200.json" />
+    <Content Include="static\map\city\654000.json" />
+    <Content Include="static\map\city\654200.json" />
+    <Content Include="static\map\city\654300.json" />
+    <Content Include="static\map\city\659000.json" />
+    <Content Include="static\map\city\710000.json" />
+    <Content Include="static\map\city\810100.json" />
+    <Content Include="static\map\city\820000.json" />
+    <Content Include="static\map\province\anhui.json" />
+    <Content Include="static\map\province\aomen.json" />
+    <Content Include="static\map\province\beijing.json" />
+    <Content Include="static\map\province\chongqing.json" />
+    <Content Include="static\map\province\fujian.json" />
+    <Content Include="static\map\province\gansu.json" />
+    <Content Include="static\map\province\guangdong.json" />
+    <Content Include="static\map\province\guangxi.json" />
+    <Content Include="static\map\province\guizhou.json" />
+    <Content Include="static\map\province\hainan.json" />
+    <Content Include="static\map\province\hebei.json" />
+    <Content Include="static\map\province\heilongjiang.json" />
+    <Content Include="static\map\province\henan.json" />
+    <Content Include="static\map\province\hubei.json" />
+    <Content Include="static\map\province\hunan.json" />
+    <Content Include="static\map\province\jiangsu.json" />
+    <Content Include="static\map\province\jiangxi.json" />
+    <Content Include="static\map\province\jilin.json" />
+    <Content Include="static\map\province\liaoning.json" />
+    <Content Include="static\map\province\neimenggu.json" />
+    <Content Include="static\map\province\ningxia.json" />
+    <Content Include="static\map\province\qinghai.json" />
+    <Content Include="static\map\province\shandong.json" />
+    <Content Include="static\map\province\shanghai.json" />
+    <Content Include="static\map\province\shanxi.json" />
+    <Content Include="static\map\province\shanxi1.json" />
+    <Content Include="static\map\province\sichuan.json" />
+    <Content Include="static\map\province\tianjin.json" />
+    <Content Include="static\map\province\xianggang.json" />
+    <Content Include="static\map\province\xinjiang.json" />
+    <Content Include="static\map\province\xizang.json" />
+    <Content Include="static\map\province\yunnan.json" />
+    <Content Include="static\map\province\zhejiang.json" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:5041/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

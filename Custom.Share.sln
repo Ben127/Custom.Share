@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom.Examples", "Custom.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom.Winform.Examples", "Custom.Winform.Examples\Custom.Winform.Examples.csproj", "{83C4E268-8AA1-4D4D-AFC0-3D76D823379F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Custom.Webform.Examples", "Custom.Webform.Examples\Custom.Webform.Examples.csproj", "{496999A3-6E12-4F39-8D8F-857305C59BFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{83C4E268-8AA1-4D4D-AFC0-3D76D823379F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83C4E268-8AA1-4D4D-AFC0-3D76D823379F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83C4E268-8AA1-4D4D-AFC0-3D76D823379F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{496999A3-6E12-4F39-8D8F-857305C59BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496999A3-6E12-4F39-8D8F-857305C59BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496999A3-6E12-4F39-8D8F-857305C59BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496999A3-6E12-4F39-8D8F-857305C59BFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +94,6 @@ Global
 		{891C560B-D253-4FB9-86B5-47DFE11E898F} = {EA1996E8-67F0-40A2-B3A4-39DB68626276}
 		{1CC7CC4C-67CE-44AF-ADAB-71BD8562AFD1} = {37C42EAF-9C53-45E9-AC69-A792CD508BF0}
 		{83C4E268-8AA1-4D4D-AFC0-3D76D823379F} = {37C42EAF-9C53-45E9-AC69-A792CD508BF0}
+		{496999A3-6E12-4F39-8D8F-857305C59BFC} = {37C42EAF-9C53-45E9-AC69-A792CD508BF0}
 	EndGlobalSection
 EndGlobal

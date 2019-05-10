@@ -17,9 +17,11 @@ namespace Custom.Basic.Framework.Test.HelperTest
         public void RSAEncryptionTest()
         {
             string source = "Hello world";
-            string result = SecurityHelper.RSAEncryption(source);
+            source = "123";
+            string result = SecurityHelper.DESEncryption(source);
 
-            string source2 = SecurityHelper.RSADecrypt(result);
+            string desResult = "YQyIm3uG3cOg8=";
+            string source2 = SecurityHelper.DESDecrypt(result);
 
             Assert.Equal(source, source2);
 
