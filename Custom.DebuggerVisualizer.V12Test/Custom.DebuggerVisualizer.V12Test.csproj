@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E8F524D5-C401-4742-AE5F-DE346D793BDA}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{7E71EBE6-21E8-422F-85B1-C63601EE04FA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Custom.DebuggerVisualizer.V12</RootNamespace>
-    <AssemblyName>Custom.DebuggerVisualizer.V12</AssemblyName>
+    <RootNamespace>Custom.DebuggerVisualizer.V12Test</RootNamespace>
+    <AssemblyName>Custom.DebuggerVisualizer.V12Test</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -20,21 +22,26 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft Visual Studio 11.0\Common7\IDE\ReferenceAssemblies\v2.0\Microsoft.VisualStudio.DebuggerVisualizers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -42,44 +49,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\ExtensionCore.cs" />
-    <Compile Include="Core\JSONHelper.cs" />
-    <Compile Include="CustomDebuggerVisualizer.cs" />
-    <Compile Include="DebuggerVisulizer\BaseDebuggerVisualizer.cs" />
-    <Compile Include="DebuggerVisulizer\DictionaryView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DebuggerVisulizer\DictionaryView.Designer.cs">
-      <DependentUpon>DictionaryView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DebuggerVisulizer\DictionaryViewVisualizer.cs" />
-    <Compile Include="DebuggerVisulizer\ImageView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DebuggerVisulizer\ImageView.Designer.cs">
-      <DependentUpon>ImageView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DebuggerVisulizer\ImageViewVisualizer.cs" />
-    <Compile Include="DebuggerVisulizer\JsonView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DebuggerVisulizer\JsonView.Designer.cs">
-      <DependentUpon>JsonView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DebuggerVisulizer\JsonViewVisualizer.cs" />
-    <Compile Include="Models\DictionaryView_Model.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DebuggerVisulizer\DictionaryView.resx">
-      <DependentUpon>DictionaryView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DebuggerVisulizer\ImageView.resx">
-      <DependentUpon>ImageView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="DebuggerVisulizer\JsonView.resx">
-      <DependentUpon>JsonView.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Custom.DebuggerVisualizer\Custom.DebuggerVisualizer.V12.csproj">
+      <Project>{e8f524d5-c401-4742-ae5f-de346d793bda}</Project>
+      <Name>Custom.DebuggerVisualizer.V12</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
