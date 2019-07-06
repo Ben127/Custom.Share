@@ -31,8 +31,7 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
                 // if image was already set by the time of form loading, update form's size
                 int width = System.Math.Max(64, System.Math.Min(800, pictureBox.Image.Width));
                 int height = System.Math.Max(64, System.Math.Min(600, pictureBox.Image.Height));
-                this.Size = new Size(width + 80, height + 155);
-                cbPictureSizeMode.SelectedIndex = 0;
+                this.Size = new Size(width + 200, height + 155);
             }
         }
 
@@ -42,15 +41,11 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
 
             if (image == null)
             {
-                Text = "Image not set";
-                saveButton.Enabled = false;
-                clipboardButton.Enabled = false;
+                toolLog.Text = "Image not set";
             }
             else
             {
-                Text = string.Format("Width: {0}, Height: {1}", image.Width, image.Height);
-                saveButton.Enabled = true;
-                clipboardButton.Enabled = true;
+                toolLog.Text = string.Format("width: {0}, height: {1}", image.Width, image.Height);
             }
 
             UpdateViewSize();
@@ -78,23 +73,14 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
             pictureBox.ResumeLayout();
         }
 
-        // Put image into clipboard
-        private void clipboardButton_Click(object sender, EventArgs e)
-        {
-            if (pictureBox.Image != null)
-            {
-                Clipboard.SetDataObject(pictureBox.Image);
-                toolLog.Text = Log("已复制粘贴板");
-            }
-        }
 
         private string Log(string message)
         {
             return string.Format("[{0}]：{1}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), message);
         }
 
-        // Save image to file
-        private void saveButton_Click(object sender, EventArgs e)
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
             if (pictureBox.Image != null)
             {
@@ -135,30 +121,42 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
             }
         }
 
-        private void cbPictureSizeMode_SelectedIndexChanged(object sender, EventArgs e)
+        private void toolStripButton2_Click(object sender, EventArgs e)
         {
-            var sizeMode = pictureBox.SizeMode;
-            switch (cbPictureSizeMode.Text)
+            if (pictureBox.Image != null)
             {
-                case "Normal":
-                    sizeMode = PictureBoxSizeMode.Normal;
-                    break;
-                case "StretchImage":
-                    sizeMode = PictureBoxSizeMode.StretchImage;
-                    break;
-                case "AutoSize":
-                    sizeMode = PictureBoxSizeMode.AutoSize;
-                    break;
-                case "CenterImage":
-                    sizeMode = PictureBoxSizeMode.CenterImage;
-                    break;
-                case "Zoom":
-                    sizeMode = PictureBoxSizeMode.Zoom;
-                    break;
+                Clipboard.SetDataObject(pictureBox.Image);
+                toolLog.Text = Log("已复制粘贴板");
             }
+        }
 
-            pictureBox.SizeMode = sizeMode;
 
+        private void normalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBox.SizeMode = PictureBoxSizeMode.Normal;
+        }
+
+        private void stretchImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+        }
+
+        private void centerImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBox.SizeMode = PictureBoxSizeMode.CenterImage;
+        }
+
+        private void zoomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+
+        private void toolStripDropDownButton1_DropDownOpening(object sender, EventArgs e)
+        {
+            normalToolStripMenuItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.Normal);
+            stretchImageToolStripMenuItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.StretchImage);
+            centerImageToolStripMenuItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.CenterImage);
+            zoomToolStripMenuItem.Checked = (pictureBox.SizeMode == PictureBoxSizeMode.Zoom);
         }
     }
 }

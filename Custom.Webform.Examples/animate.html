@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>animate</title>
+    <script src="static/js/jquery.min.js"></script>
+</head>
+<body style="height: 2000px;cursor: pointer;">
+
+    <script>
+        /* 鼠标特效 */
+        var a_idx = 0;
+        jQuery(document).ready(function ($) {
+
+            $("body").click(function (e) {
+                var a = new Array("❤团结❤", "❤友爱❤", "❤敬业❤", "❤爱国❤", "❤富强❤", "❤和谐❤", "❤帅气❤", "❤️人见人爱❤️", "❤️花见花开❤️", "❤️车见车爆胎❤️");
+
+                var $i = $("<span></span>").text(a[a_idx]);
+                a_idx = (a_idx + 1) % a.length;
+                var x = e.pageX,
+                y = e.pageY;
+                $i.css({
+                    "z-index": 999999999999999999999999999999999999999999999999999999999999999999999,
+                    "top": y - 20,
+                    "left": x,
+                    "position": "absolute",
+                    "font-weight": "bold",
+                    "color": "rgb(" + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + "," + ~~(255 * Math.random()) + ")"
+                });
+                $("body").append($i);
+                $i.animate({
+                    "top": y - 180,
+                    "opacity": 0
+                },
+                1500,
+                function () {
+                    $i.remove();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -56,6 +56,12 @@
   <ItemGroup>
     <Content Include="Read Me.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Custom.Basic.Framework\Custom.Basic.Framework.csproj">
+      <Project>{891c560b-d253-4fb9-86b5-47dfe11e898f}</Project>
+      <Name>Custom.Basic.Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

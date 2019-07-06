@@ -13,14 +13,17 @@ namespace Custom.DebuggerVisualizer.V12Test
         [STAThread]
         static void Main(string[] args)
         {
-            DictionaryTest();
+            //ImageTest();
+            //JsonTest();
+            //DictionaryTest();
+            ICollectionTest();
 
             Console.ReadKey();
         }
 
         static void ImageTest()
         {
-            var bitmap = Image.FromFile(@"D:\Temp\img1.jpg");
+            var bitmap = Image.FromFile(@"C:\Users\Benny\Desktop\保存图\new_douyin.png");
             VisualizerDevelopmentHost host = new VisualizerDevelopmentHost(bitmap, typeof(ImageViewVisualizer));
             host.ShowVisualizer();
         }
@@ -46,11 +49,26 @@ namespace Custom.DebuggerVisualizer.V12Test
             host.ShowVisualizer();
         }
 
+
+        static void ICollectionTest()
+        {
+            List<Test> result = new List<Test>()
+            {
+                new Test{  Id=DateTime.Now.Second, Name=Guid.NewGuid().ToString()}
+            };
+
+            VisualizerDevelopmentHost host = new VisualizerDevelopmentHost(result, typeof(CollectionViewVisualizer));
+            host.ShowVisualizer();
+
+        }
+
         [Serializable]
         public class Test
         {
-
+            public int Id { get; set; }
+            public string Name { get; set; }
         }
+
 
     }
 }

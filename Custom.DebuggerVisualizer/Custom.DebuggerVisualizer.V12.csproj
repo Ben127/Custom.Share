@@ -44,8 +44,16 @@
   <ItemGroup>
     <Compile Include="Core\ExtensionCore.cs" />
     <Compile Include="Core\JSONHelper.cs" />
+    <Compile Include="Core\ToolHelper.cs" />
     <Compile Include="CustomDebuggerVisualizer.cs" />
     <Compile Include="DebuggerVisulizer\BaseDebuggerVisualizer.cs" />
+    <Compile Include="DebuggerVisulizer\CollectionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebuggerVisulizer\CollectionView.designer.cs">
+      <DependentUpon>CollectionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DebuggerVisulizer\CollectionViewVisualizer.cs" />
     <Compile Include="DebuggerVisulizer\DictionaryView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +79,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DebuggerVisulizer\CollectionView.resx">
+      <DependentUpon>CollectionView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DebuggerVisulizer\DictionaryView.resx">
       <DependentUpon>DictionaryView.cs</DependentUpon>
     </EmbeddedResource>
