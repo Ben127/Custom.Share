@@ -157,6 +157,7 @@
     <Compile Include="Helper\XpathHelper.cs" />
     <Compile Include="Json\PropertySerializeContractResolver.cs" />
     <Compile Include="Package\Excel\ExcelEpplusManager.cs" />
+    <Compile Include="Package\Guid\GuidManager.cs" />
     <Compile Include="Package\Html\HtmlManger.cs" />
     <Compile Include="Package\Policy\PolicyManager.cs" />
     <Compile Include="Package\Redis\RedisConfig.cs" />

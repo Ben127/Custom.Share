@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.DebuggerVisualizers;
+﻿using Custom.DebuggerVisualizer.V12.DebuggerVisulizer;
+using Microsoft.VisualStudio.DebuggerVisualizers;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-[assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.DictionaryViewVisualizer), typeof(VisualizerObjectSource), Target = typeof(IDictionary), Description = "Dictionary Visualizer v1.0")]
+[assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.DictionaryViewVisualizer), typeof(BaseVisualizerObjectSource), Target = typeof(IDictionary), Description = "Dictionary Visualizer v1.0")]
 namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
 {
     public class DictionaryViewVisualizer : BaseDebuggerVisualizer

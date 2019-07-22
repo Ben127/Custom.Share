@@ -46,7 +46,8 @@
     <Compile Include="Core\JSONHelper.cs" />
     <Compile Include="Core\ToolHelper.cs" />
     <Compile Include="CustomDebuggerVisualizer.cs" />
-    <Compile Include="DebuggerVisulizer\BaseDebuggerVisualizer.cs" />
+    <Compile Include="DebuggerVisulizer\Base\BaseVisualizerObjectSource.cs" />
+    <Compile Include="DebuggerVisulizer\Base\BaseDebuggerVisualizer.cs" />
     <Compile Include="DebuggerVisulizer\CollectionView.cs">
       <SubType>Form</SubType>
     </Compile>

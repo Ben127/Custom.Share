@@ -15,7 +15,7 @@ namespace Custom.DebuggerVisualizer.V12Test
         {
             //ImageTest();
             //JsonTest();
-            //DictionaryTest();
+            DictionaryTest();
             ICollectionTest();
 
             Console.ReadKey();
