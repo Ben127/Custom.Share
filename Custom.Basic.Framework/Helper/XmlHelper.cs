@@ -96,5 +96,70 @@ namespace Custom.Basic.Framework.Helper
                 return xmlSerializer.Deserialize(stringReader);
             }
         }
+
+
+        /// <summary>
+        /// xml 序列化
+        ///         XmlElement 元素， XmlAttribute 属性
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xmlPathName"></param>
+        /// <param name="data"></param>
+        /// <param name="encoding"></param>
+        /// <param name="namespaces"></param>
+        /// <returns></returns>
+        public static bool Serialize<T>(string xmlPathName, object data, Encoding encoding, XmlSerializerNamespaces namespaces = null)
+        {
+            if (encoding == null)
+            {
+                encoding = Encoding.GetEncoding("UTF-8");
+            }
+
+            if (namespaces == null)
+            {
+                namespaces = new XmlSerializerNamespaces();
+                namespaces.Add("", "");
+            }
+
+
+            try
+            {
+                using (Stream writer = new FileStream(xmlPathName, FileMode.Create, FileAccess.ReadWrite))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    StreamWriter textWriter = new StreamWriter(writer, encoding);
+                    serializer.Serialize(textWriter, data, namespaces);
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// xml 反序列化
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="xmlContent"></param>
+        /// <returns></returns>
+        public static T Deserialize<T>(string xmlContent) where T : class
+        {
+            try
+            {
+                using (StringReader sr = new StringReader(xmlContent))
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    return serializer.Deserialize(sr) as T;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using Custom.Basic.Framework.Test.ModelTest;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -43,6 +44,50 @@ namespace Custom.Basic.Framework.Test.HelperTest
             Assert.True(xmlContent != null);
         }
 
+        [Fact]
+        public void SerializeTest()
+        {
+            RootModel root = new RootModel()
+            {
+                Id = 1,
+                Xmls = new List<XmlModel>
+                {
+                     new XmlModel{ Id=100, Data=new DataModel{ Id=1, Name="哪吒闹海"}},
+                     new XmlModel{ Id=101, Data=new DataModel{ Id=2, Name="誓言"}}
+                }
+            };
+
+            string xml = AppDomain.CurrentDomain.BaseDirectory + "\\123.xml";
+
+            XmlHelper.Serialize<RootModel>(xml, root, Encoding.UTF8);
+            Assert.True(File.Exists(xml));
+
+        }
+
+
+        [Fact]
+        public void DeserializeTest()
+        {
+            string xml = @"<?xml version=""1.0"" encoding=""utf-8""?>
+                                        <root id=""1"">
+                                          <items>
+                                            <id>100</id>
+                                            <data id=""1"">
+                                              <name>哪吒闹海</name>
+                                            </data>
+                                          </items>
+                                          <items>
+                                            <id>101</id>
+                                            <data id=""2"">
+                                              <name>誓言</name>
+                                            </data>
+                                          </items>
+                                        </root>";
+            RootModel result = XmlHelper.Deserialize<RootModel>(xml);
+            Assert.NotNull(result);
+            Assert.True(result.Id == 1);
+
+        }
 
     }
 }
