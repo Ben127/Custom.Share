@@ -50,6 +50,10 @@
       <HintPath>..\packages\JWT.2.4.2\lib\net35\JWT.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LiteDB, Version=3.0.0.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.3.0.0\lib\net35\LiteDB.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -92,6 +96,7 @@
     <Compile Include="Common\CacheManager.cs" />
     <Compile Include="Common\ICache.cs" />
     <Compile Include="Compiler\CompilerManager.cs" />
+    <Compile Include="Entity\LiteDb\LiteDbManager.cs" />
     <Compile Include="Entity\PetaPoco\AnsiString.cs" />
     <Compile Include="Entity\PetaPoco\ArrayKey.cs" />
     <Compile Include="Entity\PetaPoco\AutoSelectHelper.cs" />
@@ -165,7 +170,6 @@
     <Compile Include="Helper\WinformHelper.cs" />
     <Compile Include="Helper\XmlHelper.cs" />
     <Compile Include="Helper\XpathHelper.cs" />
-    <Compile Include="Json\PropertySerializeContractResolver.cs" />
     <Compile Include="Package\Excel\ExcelEpplusManager.cs" />
     <Compile Include="Package\Guid\GuidManager.cs" />
     <Compile Include="Package\Html\HtmlManger.cs" />
