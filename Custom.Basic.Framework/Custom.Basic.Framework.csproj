@@ -155,6 +155,7 @@
     <Compile Include="Entity\PetaPoco\Transaction.cs" />
     <Compile Include="Entity\PetaPoco\Attribute\ValueConverterAttribute.cs" />
     <Compile Include="Helper\ChineseHelper.cs" />
+    <Compile Include="Helper\CmdProgressHelper.cs" />
     <Compile Include="Helper\CSVHelper.cs" />
     <Compile Include="Helper\DictionaryHelper.cs" />
     <Compile Include="Helper\GzipHelper.cs" />

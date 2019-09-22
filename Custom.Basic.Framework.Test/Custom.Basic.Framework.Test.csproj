@@ -75,6 +75,7 @@
     <Compile Include="EntityTest\LiteDbManagerTest.cs" />
     <Compile Include="EntityTest\PetaPocoTest.cs" />
     <Compile Include="GuidTest\GuidManagerTest.cs" />
+    <Compile Include="HelperTest\CmdProgressHelperTest.cs" />
     <Compile Include="HelperTest\DictionaryHelperTest.cs" />
     <Compile Include="HelperTest\JsonHelperTest.cs" />
     <Compile Include="HelperTest\LogHelperTest.cs" />
