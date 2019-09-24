@@ -58,10 +58,10 @@ namespace Custom.Basic.Framework.Helper
         }
 
         /// <summary>
-        /// cmd 进度
+        /// cmd 异步进度
         /// </summary>
         /// <param name="cmd"></param>
-        public void Execute(string cmd)
+        public void ExecuteAsync(string cmd)
         {
             if (StartCmd())
             {
@@ -78,7 +78,7 @@ namespace Custom.Basic.Framework.Helper
         /// </summary>
         /// <param name="cmd"></param>
         /// <returns></returns>
-        public string SyncExecute(string cmd)
+        public string Execute(string cmd)
         {
             cmd = cmd.Trim().TrimEnd('&') + "&exit";
             using (Process p = new Process())
@@ -100,6 +100,32 @@ namespace Custom.Basic.Framework.Helper
 
                 return result;
             }
+        }
+
+        /// <summary>
+        /// cmd  直接执行，返回结果更好
+        /// </summary>
+        /// <Param name="command"></Param>
+        /// <returns></returns>
+        public string ExecuteSync(string command)
+        {
+            string str = "";
+            ProcessStartInfo startInfo = new ProcessStartInfo("cmd", "/c " + command)
+            {
+                RedirectStandardOutput = true,
+                UseShellExecute = false,
+                RedirectStandardError = true,
+                CreateNoWindow = true
+            };
+            using (Process process = Process.Start(startInfo))
+            {
+                using (StreamReader reader = process.StandardOutput)
+                {
+                    str = reader.ReadToEnd();
+                }
+                process.WaitForExit();
+            }
+            return str.Trim();
         }
 
 

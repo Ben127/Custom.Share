@@ -20,16 +20,16 @@ namespace Custom.Basic.Framework.Test.HelperTest
         public void Execute()
         {
             CmdProgressHelper target = new CmdProgressHelper();
-            target.OnGetCmdMessage += target_OnGetCmdMessage;
-            target.Execute("ipconfig");
+            //target.OnGetCmdMessage += target_OnGetCmdMessage;
+            //target.Execute("ipconfig");
 
-            while (_cmdResult.Length == 0)
-            {
-                Console.WriteLine(_cmdResult);
-                Thread.Sleep(1000);
-            }
+            //while (_cmdResult.Length == 0)
+            //{
+            //    Console.WriteLine(_cmdResult);
+            //    Thread.Sleep(1000);
+            //}
 
-            //_cmdResult = target.SyncExecute("ipconfig");
+            _cmdResult = target.Execute("ipconfig");
 
             Assert.True(_cmdResult.Length > 0);
 
