@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Custom.Basic.Framework.Pinvoke.Enum;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
@@ -65,7 +66,16 @@ namespace Custom.Basic.Framework.Pinvoke
         public static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
 
 
-
+        /// <summary>
+        /// 设置会话 参数
+        /// </summary>
+        /// <param name="dwOption"></param>
+        /// <param name="pBuffer"></param>
+        /// <param name="dwBufferLength"></param>
+        /// <param name="dwReserved">保留。必须设置为0。</param>
+        /// <returns></returns>
+        [DllImport("urlmon.dll", CharSet = CharSet.Ansi)]
+        public static extern int UrlMkSetSessionOption(UrlMkSetSessionOptionFlags dwOption, string pBuffer, int dwBufferLength, int dwReserved);
 
 
 

@@ -181,6 +181,7 @@
     <Compile Include="Package\Web\RestSharpManager.cs" />
     <Compile Include="Pinvoke\Enum\AnimateWindowFlags.cs" />
     <Compile Include="Pinvoke\Enum\InternetGetConnectedStateFlags.cs" />
+    <Compile Include="Pinvoke\Enum\UrlMkSetSessionOptionFlags.cs" />
     <Compile Include="Pinvoke\User32Extension.cs" />
     <Compile Include="Pinvoke\WininetExtension.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
