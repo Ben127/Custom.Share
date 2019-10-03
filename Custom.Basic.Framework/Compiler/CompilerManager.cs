@@ -34,7 +34,6 @@ namespace Custom.Basic.Framework.Compiler
 
 
         static List<string> _complierDlls;
-
         static CompilerManager()
         {
             _complierDlls = GetComplierDlls();
@@ -131,7 +130,6 @@ namespace Custom.Basic.Framework.Compiler
             CompilerParameters compilerParameters = new CompilerParameters();
             compilerParameters.GenerateExecutable = false;
             compilerParameters.GenerateInMemory = true;
-
             foreach (string item in ComplierCollection)
             {
                 compilerParameters.ReferencedAssemblies.Add(item);

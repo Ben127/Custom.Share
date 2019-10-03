@@ -11,6 +11,5 @@ namespace Custom.Basic.Framework.Common
     /// </summary>
     interface ICache
     {
-
     }
 }

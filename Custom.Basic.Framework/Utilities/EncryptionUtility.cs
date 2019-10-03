@@ -13,7 +13,6 @@ namespace Custom.Basic.Framework.Utilities
     /// </summary>
     public static class EncryptionUtility
     {
-
         /// <summary>
         /// AES 对称加密
         /// </summary>
@@ -71,7 +70,6 @@ namespace Custom.Basic.Framework.Utilities
             byte[] result = AES_DncryptByte(encryBytes, key, IV);
 
             return Encoding.UTF8.GetString(result);
-
         }
 
 
@@ -106,17 +104,14 @@ namespace Custom.Basic.Framework.Utilities
                 {
                     using (CryptoStream csDecrypt = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
                     {
-
                         using (StreamReader sr = new StreamReader(csDecrypt))
                         {
-
                             List<char> result = new List<char>();
                             char[] resutChars = null;
                             while (sr.Peek() >= 0)
                             {
                                 resutChars = new char[1];
                                 sr.Read(resutChars, 0, resutChars.Length);
-
                                 result.AddRange(resutChars);
                             }
 
@@ -129,7 +124,6 @@ namespace Custom.Basic.Framework.Utilities
             }
 
             return resultDncryptBytes;
-
         }
 
 

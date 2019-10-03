@@ -12,7 +12,6 @@ namespace Custom.Basic.Framework.Common
     /// </summary>
     public class CacheManager : ICache
     {
-
         private CacheManager()
         {
 
