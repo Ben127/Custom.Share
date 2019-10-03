@@ -12,7 +12,6 @@ namespace Custom.Elasticsearch.Framework
     /// </summary>
     internal class EsConfig
     {
-
         /// <summary>
         ///  服务节点
         /// </summary>
@@ -27,6 +26,5 @@ namespace Custom.Elasticsearch.Framework
         ///  是否调试模式
         /// </summary>
         internal static string DebuggerMode = ConfigurationManager.AppSettings["elasticsearch.debuggermode"];
-
     }
 }

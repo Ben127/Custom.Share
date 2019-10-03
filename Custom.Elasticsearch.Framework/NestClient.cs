@@ -41,7 +41,6 @@ namespace Custom.Elasticsearch.Framework
                      *   自动生成 query查询语句和返回内容 response [正式版关闭，避免性能差异]
                      */
                     settings.DisableDirectStreaming(debugger);
-
                     DebuggerMode = debugger;
                 }
 

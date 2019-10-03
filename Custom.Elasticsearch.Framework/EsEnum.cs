@@ -13,7 +13,6 @@ namespace Custom.Elasticsearch.Framework
     public enum Enum_Index
     {
         article,
-
     }
 
 

@@ -34,25 +34,17 @@ namespace Custom.CustomControl
 
 
         private System.Drawing.Color _TextColor = System.Drawing.Color.Black;
-
         private System.Drawing.Font _TextFont = new System.Drawing.Font("yaHei ", 12);
-
         public System.Drawing.Color TextColor
         {
-
             get { return _TextColor; }
-
             set { _TextColor = value; this.Invalidate(); }
-
         }
 
         public System.Drawing.Font TextFont
         {
-
             get { return _TextFont; }
-
             set { _TextFont = value; this.Invalidate(); }
-
         }
 
 
