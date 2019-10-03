@@ -16,6 +16,7 @@ namespace Custom.Winform
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FrmDatagridView());
+
         }
     }
 }
