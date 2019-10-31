@@ -16,7 +16,7 @@ namespace Custom.DebuggerVisualizer.V12Test
             //ImageTest();
             //JsonTest();
             DictionaryTest();
-            ICollectionTest();
+            //ICollectionTest();
 
             Console.ReadKey();
         }
@@ -44,9 +44,10 @@ namespace Custom.DebuggerVisualizer.V12Test
                 {"荔湾区",new Test()},
                 {"白云区",new Test()},
             };
+            CollectionViewVisualizer.TestShowVisualizer(dict);
 
-            VisualizerDevelopmentHost host = new VisualizerDevelopmentHost(dict, typeof(DictionaryViewVisualizer));
-            host.ShowVisualizer();
+            //VisualizerDevelopmentHost host = new VisualizerDevelopmentHost(dict, typeof(CollectionViewVisualizer));
+            //host.ShowVisualizer();
         }
 
 

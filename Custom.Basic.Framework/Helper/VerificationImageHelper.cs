@@ -16,9 +16,9 @@ namespace Custom.Basic.Framework.Helper
     public class VerificationImageHelper
     {
 
-        public static List<Bitmap> CutImages(string path, Action<Bitmap> act = null)
+        public static List<Bitmap> CutImages(Bitmap bitmap, Action<Bitmap> act = null)
         {
-            Bitmap sourceBitmap = (Bitmap)AForge.Imaging.Image.FromFile(path);
+            Bitmap sourceBitmap = bitmap;
             Bitmap targetBitmap = (Bitmap)sourceBitmap.Clone();
             if (!AForge.Imaging.Image.IsGrayscale(targetBitmap))
             {
@@ -51,13 +51,17 @@ namespace Custom.Basic.Framework.Helper
             var bit1 = Crop_Y(targetBitmap);
             var bit2 = Crop_X(bit1);
             return ToResizeAndCenterIt(bit2);
-
         }
 
-
-        public static Bitmap CutImagesJoinAll(string path, Action<Bitmap> act = null)
+        public static List<Bitmap> CutImages(string path, Action<Bitmap> act = null)
         {
-            var bitmaps = CutImages(path, act);
+            Bitmap sourceBitmap = (Bitmap)AForge.Imaging.Image.FromFile(path);
+            return CutImages(sourceBitmap, act);
+        }
+
+        public static Bitmap CutImagesJoinAll(Bitmap sourcebitmap, Action<Bitmap> act = null)
+        {
+            var bitmaps = CutImages(sourcebitmap, act);
 
             //
             int paddingwidth = 2;
@@ -81,6 +85,12 @@ namespace Custom.Basic.Framework.Helper
             g.Dispose();
 
             return bitmap;
+        }
+
+        public static Bitmap CutImagesJoinAll(string path, Action<Bitmap> act = null)
+        {
+            Bitmap sourceBitmap = (Bitmap)AForge.Imaging.Image.FromFile(path);
+            return CutImagesJoinAll(sourceBitmap, act);
         }
 
 

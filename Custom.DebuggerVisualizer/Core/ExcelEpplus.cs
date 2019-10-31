@@ -8,12 +8,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Custom.Basic.Framework.Package.Excel
+namespace Custom.DebuggerVisualizer.V12
 {
     /// <summary>
     /// Epplus Excel 导出
     /// </summary>
-    public class ExcelEpplusManager
+    public class ExcelEpplus
     {
         /// <summary>
         /// 泛型列表导出Excel
@@ -21,17 +21,18 @@ namespace Custom.Basic.Framework.Package.Excel
         /// <typeparam name="T"></typeparam>
         /// <param name="datas">数据</param>
         /// <param name="excelName">Excel文件名</param>
-        public static void Export<T>(List<T> datas, string excelName, bool printHeader = true, TableStyles tableStyle = TableStyles.Light12)
+        public static void Export<T>(List<T> datas, string excelName, string tableName = "sheet")
         {
             using (var p = new ExcelPackage())
             {
-                var ws = p.Workbook.Worksheets.Add("sheet");
-                ws.Cells["A1"].LoadFromCollection(datas, printHeader, tableStyle);
+                var ws = p.Workbook.Worksheets.Add(tableName);
+                ws.Cells["A1"].LoadFromCollection(datas, false, TableStyles.Light12);
 
                 p.SaveAs(new FileInfo(excelName));
             }
 
         }
+
 
         public static void Export(string excelName, Action<ExcelPackage> excelFunc)
         {
@@ -43,13 +44,14 @@ namespace Custom.Basic.Framework.Package.Excel
 
         }
 
+
+
         /// <summary>
         /// 字典列表导出Excel
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="datas">数据</param>
         /// <param name="excelName">Excel文件名</param>
-        /// <param name="password">密码</param>
         public static void Export<T>(Dictionary<string, List<T>> dataDicts, string excelName)
         {
             using (var p = new ExcelPackage())
@@ -60,16 +62,9 @@ namespace Custom.Basic.Framework.Package.Excel
 
                     // 
                     ws.Cells["A2"].LoadFromText(v.Key);
-                    int left = 2;
-                    int right = v.Value.Count;
-                    if (left > right)
-                    {
-                        right = left;
-                    }
-
-                    ws.Cells[string.Format("A2:A{0}", right)].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-                    ws.Cells[string.Format("A2:A{0}", right)].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
-                    ws.Cells[string.Format("A2:A{0}", right)].Merge = true;
+                    ws.Cells[string.Format("A2:A{0}", v.Value.Count)].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
+                    ws.Cells[string.Format("A2:A{0}", v.Value.Count)].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                    ws.Cells[string.Format("A2:A{0}", v.Value.Count)].Merge = true;
 
                     ws.Cells["B1"].LoadFromCollection(v.Value, false, TableStyles.Light12);
                 }
@@ -82,14 +77,15 @@ namespace Custom.Basic.Framework.Package.Excel
 
         /// <summary>
         ///  DataTable 导出Excel
+        ///         数据量大时自动 sheet 
         /// </summary>
-        /// <param name="datas">数据</param>
+        /// <param name="dt">数据</param>
         /// <param name="excelName">Excel文件名</param>
-        public static void Export(DataTable datas, string excelName, bool printHeader = true)
+        public static void Export(DataTable dt, string excelName)
         {
             using (var p = new ExcelPackage())
             {
-                var dict = GetSplitDataTable(datas);
+                var dict = GetSplitDataTable(dt);
                 foreach (var item in dict)
                 {
                     var ws = p.Workbook.Worksheets.Add("sheet" + item.Key);
@@ -162,6 +158,6 @@ namespace Custom.Basic.Framework.Package.Excel
         }
 
 
-
     }
 }
+

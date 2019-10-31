@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CYQ.Data, Version=5.7.8.5, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Lib\CYQ.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.DebuggerVisualizers, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\ExcelEpplus.cs" />
     <Compile Include="Core\ExtensionCore.cs" />
     <Compile Include="Core\JSONHelper.cs" />
     <Compile Include="Core\ToolHelper.cs" />
@@ -55,13 +64,6 @@
       <DependentUpon>CollectionView.cs</DependentUpon>
     </Compile>
     <Compile Include="DebuggerVisulizer\CollectionViewVisualizer.cs" />
-    <Compile Include="DebuggerVisulizer\DictionaryView.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="DebuggerVisulizer\DictionaryView.Designer.cs">
-      <DependentUpon>DictionaryView.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DebuggerVisulizer\DictionaryViewVisualizer.cs" />
     <Compile Include="DebuggerVisulizer\ImageView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,15 +85,19 @@
     <EmbeddedResource Include="DebuggerVisulizer\CollectionView.resx">
       <DependentUpon>CollectionView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DebuggerVisulizer\DictionaryView.resx">
-      <DependentUpon>DictionaryView.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="DebuggerVisulizer\ImageView.resx">
       <DependentUpon>ImageView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DebuggerVisulizer\JsonView.resx">
       <DependentUpon>JsonView.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Lib\CYQ.Data.dll" />
+    <Content Include="Lib\CYQ.Data.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

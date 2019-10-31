@@ -14,10 +14,6 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
     public class BaseVisualizerObjectSource : VisualizerObjectSource
     {
 
-        public override void GetData(object target, Stream outgoingData)
-        {
-            base.GetData(target, outgoingData);
-        }
 
     }
 }
