@@ -12,8 +12,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+[assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(string), Description = "IList Visualizer v1.0")]
 [assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(List<>), Description = "IList Visualizer v1.0")]
 [assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(Dictionary<,>), Description = "IList Visualizer v1.0")]
+[assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(Array), Description = "IList Visualizer v1.0")]
 [assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(ArrayList), Description = "IList Visualizer v1.0")]
 [assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(ReadOnlyCollectionBase), Description = "IList Visualizer v1.0")]
 [assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(Hashtable), Description = "IList Visualizer v1.0")]
@@ -61,30 +63,15 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
             //}
 
             //插入行号
-            MCellStruct ms = new MCellStruct("序号", System.Data.SqlDbType.Int);
+            MCellStruct ms = new MCellStruct("索引", System.Data.SqlDbType.Int);
             dt.Columns.Insert(0, ms);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                dt.Rows[i][0].Value = i + 1;
+                dt.Rows[i][0].Value = i;
             }
 
             CollectionView form = new CollectionView(dt.ToDataTable());
             windowService.ShowDialog(form);
-        }
-
-
-
-        /// <summary>
-        /// DEBUG 使用
-        /// </summary>
-        /// <param name="objectToVisualize"></param>
-        public static void TestShowVisualizer(object objectToVisualize)
-        {
-            var visualizerHost = new VisualizerDevelopmentHost(
-                objectToVisualize,
-                typeof(CollectionViewVisualizer),
-                typeof(CollectionObjectSource));
-            visualizerHost.ShowVisualizer();
         }
 
     }
@@ -135,6 +122,10 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
             else if (target is NameObjectCollectionBase)
             {
                 dt = MDataTable.CreateFrom(target as NameObjectCollectionBase);
+            }
+            else if (target is string)
+            {
+                dt = MDataTable.CreateFrom(target as string);
             }
             else if (target is IEnumerable)
             {

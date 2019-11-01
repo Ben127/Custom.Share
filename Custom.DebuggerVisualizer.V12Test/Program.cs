@@ -44,7 +44,7 @@ namespace Custom.DebuggerVisualizer.V12Test
                 {"荔湾区",new Test()},
                 {"白云区",new Test()},
             };
-            CollectionViewVisualizer.TestShowVisualizer(dict);
+            CollectionViewVisualizer.TestShowVisualizer<CollectionViewVisualizer, CollectionObjectSource>(dict);
 
             //VisualizerDevelopmentHost host = new VisualizerDevelopmentHost(dict, typeof(CollectionViewVisualizer));
             //host.ShowVisualizer();

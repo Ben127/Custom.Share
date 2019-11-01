@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,9 +35,21 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
             if (this.dataTable != null)
             {
                 //
-                this.dataGrid.DataSource = this.dataTable;
+                ////this.dataGridView1.RowsDefaultCellStyle.BackColor = Color.LightGray;
+                ////this.dataGridView1.AlternatingRowsDefaultCellStyle.BackColor = Color.Transparent;
+                //this.dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                this.dataGridView1.DataSource = this.dataTable;
                 this.dataTableQuery = this.dataTable;
-                this.dataGrid.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+
+                var columns = this.dataGridView1.Columns;
+                columns[0].Width = 80;
+
+                foreach (DataGridViewColumn v in columns)
+                {
+                    v.SortMode = DataGridViewColumnSortMode.NotSortable;
+                }
+
                 Log("总计：" + this.total.ToString() + " 条");
 
             }
@@ -45,8 +58,8 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
         private void dataGrid_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             //自动编号，与数据无关
-            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dataGrid.RowHeadersWidth - 15, e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dataGrid.RowHeadersDefaultCellStyle.Font, rectangle, dataGrid.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+            Rectangle rectangle = new Rectangle(e.RowBounds.Location.X, e.RowBounds.Location.Y, dataGridView1.RowHeadersWidth - 15, e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dataGridView1.RowHeadersDefaultCellStyle.Font, rectangle, dataGridView1.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
 
         private Dictionary<string, int> cacheDataTable = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -101,17 +114,23 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
 
             if (searchSuccess)
             {
-                this.dataGrid.DataSource = dataTableQuery;
+                this.dataGridView1.DataSource = dataTableQuery;
                 Log("总计：" + dataTableQuery.Rows.Count.ToString() + " 条");
             }
+            else
+            {
+                this.dataGridView1.DataSource = dataTable;
+                Log("总计：" + total.ToString() + " 条");
+            }
+
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
             this.search_index.Text = "";
             this.search_content.Text = "";
-            this.dataGrid.DataSource = null;
-            this.dataGrid.DataSource = this.dataTable;
+            this.dataGridView1.DataSource = null;
+            this.dataGridView1.DataSource = this.dataTable;
             AppendLog("总计：" + this.total.ToString() + " 条");
         }
 
@@ -160,6 +179,29 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
 
 
 
+        }
+
+        string pattern = @".*?(\d+).*?";
+
+        private void search_index_TextChanged(object sender, EventArgs e)
+        {
+            string value = search_index.Text;
+            Regex regex = new Regex(pattern, RegexOptions.Singleline);
+
+            if (regex.IsMatch(value))
+            {
+                string newValue = regex.Replace(value, "$1");
+                search_index.Text = newValue;
+            }
+            else
+            {
+                search_index.Text = "";
+            }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
 

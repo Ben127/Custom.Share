@@ -13,7 +13,22 @@ namespace Custom.DebuggerVisualizer
     /// </summary>
     public abstract class BaseDebuggerVisualizer : DialogDebuggerVisualizer
     {
-
+        /// <summary>
+        /// Debug 调试
+        /// </summary>
+        /// <typeparam name="Visualizer"></typeparam>
+        /// <typeparam name="ObjectSource"></typeparam>
+        /// <param name="objectToVisualize"></param>
+        public static void TestShowVisualizer<Visualizer, ObjectSource>(object objectToVisualize)
+            where Visualizer : class
+            where ObjectSource : class
+        {
+            var visualizerHost = new VisualizerDevelopmentHost(
+                objectToVisualize,
+                typeof(Visualizer),
+                typeof(ObjectSource));
+            visualizerHost.ShowVisualizer();
+        }
 
     }
 }
