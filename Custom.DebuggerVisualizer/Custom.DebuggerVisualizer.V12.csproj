@@ -57,6 +57,12 @@
     <Compile Include="CustomDebuggerVisualizer.cs" />
     <Compile Include="DebuggerVisulizer\Base\BaseVisualizerObjectSource.cs" />
     <Compile Include="DebuggerVisulizer\Base\BaseDebuggerVisualizer.cs" />
+    <Compile Include="DebuggerVisulizer\CollectionDetailView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebuggerVisulizer\CollectionDetailView.designer.cs">
+      <DependentUpon>CollectionDetailView.cs</DependentUpon>
+    </Compile>
     <Compile Include="DebuggerVisulizer\CollectionView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="DebuggerVisulizer\CollectionDetailView.resx">
+      <DependentUpon>CollectionDetailView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DebuggerVisulizer\CollectionView.resx">
       <DependentUpon>CollectionView.cs</DependentUpon>
     </EmbeddedResource>

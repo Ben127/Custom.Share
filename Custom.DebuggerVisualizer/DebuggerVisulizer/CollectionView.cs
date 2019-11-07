@@ -30,6 +30,12 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
             this.total = this.dataTable.Rows.Count;
         }
 
+        public CollectionView(object o)
+            : this()
+        {
+
+        }
+
         private void CollectionView_Load(object sender, EventArgs e)
         {
             if (this.dataTable != null)
@@ -202,6 +208,24 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void 查看详情ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var cells = this.dataGridView1.SelectedCells;
+            if (cells.Count > 0)
+            {
+                object obj = cells[0].Value;
+                if (obj == null)
+                {
+                    return;
+                }
+
+                string value = obj.ToString();
+                CollectionDetailView view = new CollectionDetailView(value);
+                view.ShowDialog();
+            }
+
         }
 
 
