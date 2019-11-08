@@ -19,6 +19,8 @@ namespace Custom.Basic.Framework.Helper
 
         static LogHelper()
         {
+            //XmlConfigurator.ConfigureAndWatch(new FileInfo(AppDomain.CurrentDomain.BaseDirectory + "Config/Log4net.config"));
+
             log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }
 
