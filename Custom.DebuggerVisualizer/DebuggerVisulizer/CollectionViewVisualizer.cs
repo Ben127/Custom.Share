@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+[assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(object), Description = "IList Visualizer v1.0")]
 [assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(string), Description = "IList Visualizer v1.0")]
 [assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(List<>), Description = "IList Visualizer v1.0")]
 [assembly: System.Diagnostics.DebuggerVisualizer(typeof(Custom.DebuggerVisualizer.V12.DebuggerVisulizer.CollectionViewVisualizer), typeof(CollectionObjectSource), Target = typeof(Dictionary<,>), Description = "IList Visualizer v1.0")]
@@ -70,7 +71,7 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
                 dt.Rows[i][0].Value = i;
             }
 
-            CollectionView form = new CollectionView(dt.ToDataTable());
+            CollectionViewMain form = new CollectionViewMain(dt.ToDataTable());
             windowService.ShowDialog(form);
         }
 
@@ -86,7 +87,6 @@ namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
         {
             MDataTable dt = null;
             #region 类型判断
-
 
             if (target is MDataTable)
             {

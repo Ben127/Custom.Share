@@ -112,6 +112,7 @@
     <Compile Include="Common\CacheManager.cs" />
     <Compile Include="Common\ICache.cs" />
     <Compile Include="Compiler\CompilerManager.cs" />
+    <Compile Include="Config\CustomRollingFileAppender.cs" />
     <Compile Include="Entity\LiteDb\LiteDbManager.cs" />
     <Compile Include="Entity\PetaPoco\AnsiString.cs" />
     <Compile Include="Entity\PetaPoco\ArrayKey.cs" />

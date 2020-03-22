@@ -18,6 +18,8 @@ namespace Custom.DebuggerVisualizer.V12Test
             DictionaryTest();
             //ICollectionTest();
 
+
+
             Console.ReadKey();
         }
 
@@ -44,7 +46,9 @@ namespace Custom.DebuggerVisualizer.V12Test
                 {"荔湾区",new Test()},
                 {"白云区",new Test()},
             };
-            CollectionViewVisualizer.TestShowVisualizer<CollectionViewVisualizer, CollectionObjectSource>(dict);
+            Test yyy = new Test();
+
+            CollectionViewVisualizer.TestShowVisualizer<CollectionViewVisualizer, CollectionObjectSource>(yyy);
 
             //VisualizerDevelopmentHost host = new VisualizerDevelopmentHost(dict, typeof(CollectionViewVisualizer));
             //host.ShowVisualizer();
@@ -63,7 +67,7 @@ namespace Custom.DebuggerVisualizer.V12Test
 
         }
 
-        [Serializable]
+        //[Serializable]
         public class Test
         {
             public int Id { get; set; }

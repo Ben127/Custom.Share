@@ -1,6 +1,6 @@
 ﻿namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
 {
-    partial class CollectionDetailView
+    partial class CollectionViewMainDetail
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CollectionDetailView));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CollectionViewMainDetail));
             this.rtb_Result = new System.Windows.Forms.RichTextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ts_copy = new System.Windows.Forms.ToolStripSplitButton();
@@ -71,7 +71,6 @@
             this.ClientSize = new System.Drawing.Size(824, 584);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.rtb_Result);
-            this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CollectionDetailView";
             this.Padding = new System.Windows.Forms.Padding(10);

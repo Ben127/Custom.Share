@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace Custom.DebuggerVisualizer.V12.DebuggerVisulizer
 {
-    public partial class CollectionDetailView : Form
+    public partial class CollectionViewMainDetail : Form
     {
-        public CollectionDetailView()
+        public CollectionViewMainDetail()
         {
             InitializeComponent();
         }
 
 
         private string result;
-        public CollectionDetailView(string result)
+        public CollectionViewMainDetail(string result)
             : this()
         {
             this.result = result;

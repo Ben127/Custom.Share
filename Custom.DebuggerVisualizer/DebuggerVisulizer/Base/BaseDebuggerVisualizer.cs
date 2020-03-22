@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.VisualStudio.DebuggerVisualizers;
+using Custom.DebuggerVisualizer.V12.DebuggerVisulizer;
 
 namespace Custom.DebuggerVisualizer
 {
@@ -19,6 +20,8 @@ namespace Custom.DebuggerVisualizer
         /// <typeparam name="Visualizer"></typeparam>
         /// <typeparam name="ObjectSource"></typeparam>
         /// <param name="objectToVisualize"></param>
+        /// <param name="type"></param>
+        /// <param name="type2"></param>
         public static void TestShowVisualizer<Visualizer, ObjectSource>(object objectToVisualize)
             where Visualizer : class
             where ObjectSource : class
@@ -29,6 +32,7 @@ namespace Custom.DebuggerVisualizer
                 typeof(ObjectSource));
             visualizerHost.ShowVisualizer();
         }
+
 
     }
 }

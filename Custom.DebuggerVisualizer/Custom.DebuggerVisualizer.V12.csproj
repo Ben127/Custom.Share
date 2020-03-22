@@ -30,10 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CYQ.Data, Version=5.7.8.5, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\CYQ.Data.dll</HintPath>
-    </Reference>
     <Reference Include="EPPlus, Version=4.1.0.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
       <HintPath>..\packages\EPPlus.4.1.0\lib\net40\EPPlus.dll</HintPath>
       <Private>True</Private>
@@ -55,19 +51,20 @@
     <Compile Include="Core\JSONHelper.cs" />
     <Compile Include="Core\ToolHelper.cs" />
     <Compile Include="CustomDebuggerVisualizer.cs" />
-    <Compile Include="DebuggerVisulizer\Base\BaseVisualizerObjectSource.cs" />
     <Compile Include="DebuggerVisulizer\Base\BaseDebuggerVisualizer.cs" />
-    <Compile Include="DebuggerVisulizer\CollectionDetailView.cs">
+    <Compile Include="DebuggerVisulizer\Base\BaseVisualizerObjectSource.cs" />
+    <Compile Include="DebuggerVisulizer\CacheJsonViewVisualiezer.cs" />
+    <Compile Include="DebuggerVisulizer\CollectionViewMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DebuggerVisulizer\CollectionDetailView.designer.cs">
-      <DependentUpon>CollectionDetailView.cs</DependentUpon>
+    <Compile Include="DebuggerVisulizer\CollectionViewMain.designer.cs">
+      <DependentUpon>CollectionViewMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="DebuggerVisulizer\CollectionView.cs">
+    <Compile Include="DebuggerVisulizer\CollectionViewMainDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DebuggerVisulizer\CollectionView.designer.cs">
-      <DependentUpon>CollectionView.cs</DependentUpon>
+    <Compile Include="DebuggerVisulizer\CollectionViewMainDetail.Designer.cs">
+      <DependentUpon>CollectionViewMainDetail.cs</DependentUpon>
     </Compile>
     <Compile Include="DebuggerVisulizer\CollectionViewVisualizer.cs" />
     <Compile Include="DebuggerVisulizer\ImageView.cs">
@@ -86,13 +83,18 @@
     <Compile Include="DebuggerVisulizer\JsonViewVisualizer.cs" />
     <Compile Include="Models\DictionaryView_Model.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="DebuggerVisulizer\CollectionDetailView.resx">
-      <DependentUpon>CollectionDetailView.cs</DependentUpon>
+    <EmbeddedResource Include="DebuggerVisulizer\CollectionViewMain.resx">
+      <DependentUpon>CollectionViewMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DebuggerVisulizer\CollectionView.resx">
-      <DependentUpon>CollectionView.cs</DependentUpon>
+    <EmbeddedResource Include="DebuggerVisulizer\CollectionViewMainDetail.resx">
+      <DependentUpon>CollectionViewMainDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DebuggerVisulizer\ImageView.resx">
       <DependentUpon>ImageView.cs</DependentUpon>
@@ -100,13 +102,24 @@
     <EmbeddedResource Include="DebuggerVisulizer\JsonView.resx">
       <DependentUpon>JsonView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Lib\CYQ.Data.dll" />
     <Content Include="Lib\CYQ.Data.XML" />
+    <None Include="Resources\icons8-download-48.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CyqData\CYQ.Data.csproj">
+      <Project>{bd5ccc87-278f-4feb-ad23-157fcba9ffa1}</Project>
+      <Name>CYQ.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
